@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let mainPage = BGGamePageViewController()
-        let nav: UINavigationController = UINavigationController(rootViewController: mainPage)
+//        let mainPage = BGGamePageViewController()
+        let pg = BGSettingViewController()
+        let nav: UINavigationController = UINavigationController(rootViewController: pg)
         window?.rootViewController = nav
         window!.makeKeyAndVisible()
         return true

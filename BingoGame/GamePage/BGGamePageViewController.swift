@@ -11,6 +11,10 @@ import UIKit
 
 class BGGamePageViewController: UIViewController {
     
+    var m_btnSetting: UIBarButtonItem?
+    var m_lbStatus: UILabel?
+    var m_vBorder: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSet()
@@ -25,20 +29,20 @@ class BGGamePageViewController: UIViewController {
     }
     
     private func settingBtnSet() {
-        let settingBtn = UIBarButtonItem(title: "Setting", style: .plain, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = settingBtn
+        m_btnSetting = UIBarButtonItem(title: "Setting", style: .plain, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = m_btnSetting
     }
     
     private func statusLabelSet() {
-        let m_lbStatus = UILabel(frame: CGRect(x: 10, y: 100, width: self.view.frame.width - 30, height: 40))
-        m_lbStatus.text = "Set the game first !!"
-        m_lbStatus.textColor = UIColor.darkGray
-        self.view.addSubview(m_lbStatus)
+        m_lbStatus = UILabel(frame: CGRect(x: 10, y: 100, width: self.view.frame.width - 30, height: 40))
+        m_lbStatus!.text = "Set the game first !!"
+        m_lbStatus!.textColor = UIColor.darkGray
+        self.view.addSubview(m_lbStatus!)
     }
     private func borderViewSet() {
-        let m_vBorder = UIView(frame: CGRect(x: 10, y: 180, width: self.view.frame.width - 20, height: self.view.frame.width - 20))
-        m_vBorder.backgroundColor = UIColor.gray
-        self.view.addSubview(m_vBorder)
+        m_vBorder = UIView(frame: CGRect(x: 10, y: 180, width: self.view.frame.width - 20, height: self.view.frame.width - 20))
+        m_vBorder!.backgroundColor = UIColor.gray
+        self.view.addSubview(m_vBorder!)
         
     }
     
