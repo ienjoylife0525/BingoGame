@@ -18,20 +18,18 @@ class BGGamePageViewController: UIViewController {
     
     private func viewSet() {
         self.view.backgroundColor = UIColor.white
+        self.title = "Game Page"
         settingBtnSet()
     }
     
     private func settingBtnSet() {
-        let settingBtn: UIButton = UIButton()
-        settingBtn.frame = CGRect(x: self.view.frame.width/2 - 60, y: 80, width: 120, height: 25)
-        settingBtn.layer.borderWidth = 1
-        settingBtn.layer.cornerRadius = 10
-        settingBtn.setTitle("Game Set", for: .normal)
-        settingBtn.setTitleColor(UIColor.darkGray, for: .normal)
-        self.view.addSubview(settingBtn)
+        let settingBtn = UIBarButtonItem(title: "Setting", style: .plain, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = settingBtn
     }
     
-    
+    private func borderViewSet() {
+        
+    }
     
 }
 
