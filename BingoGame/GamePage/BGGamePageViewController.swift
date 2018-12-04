@@ -11,9 +11,16 @@ import UIKit
 
 class BGGamePageViewController: UIViewController {
     
+    // UI
     var m_btnSetting: UIBarButtonItem?
     var m_lbStatus: UILabel?
     var m_vBorder: UIView?
+    
+    // variable
+    var size:Int = 0
+    var goal:Int = 0
+    var minNum:Int = 0
+    var maxNum:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +64,28 @@ class BGGamePageViewController: UIViewController {
     // Function
     @objc private func clickSetting() {
         let m_vcSetPage = BGSettingViewController()
+        m_vcSetPage.setDelegate = self
         self.navigationController?.pushViewController(m_vcSetPage, animated: true)
+    }
+    
+}
+
+extension BGGamePageViewController: GameSettingDelegate{
+    func setSize(_ setPage: BGSettingViewController, size: Int) {
+        self.size = size
+        print("size \(size)")
+    }
+    
+    func setGoal(_ setPage: BGSettingViewController, goal: Int) {
+        self.goal = goal
+        print("goal \(goal)")
+    }
+    
+    func setRange(_ setPage: BGSettingViewController, min: Int, max: Int) {
+        self.minNum = min
+        self.maxNum = max
         
+        print("Range \(min) ~ \(max)")
     }
     
 }
