@@ -85,6 +85,68 @@ class BGGamePageViewController: UIViewController {
         
     }
     
+    private func checkBingoLine() -> Int {
+        var line = 0
+        //check raw
+        for i in stride(from: 0, to: boardSize*boardSize, by: boardSize) {
+            var goalNum = 0
+            for j in 0..<boardSize {
+                if board[i + j] == true {
+                    goalNum = goalNum + 1
+                }else {
+                    break
+                }
+            }
+            if goalNum == boardSize {
+                line = line + 1
+            }
+        }
+        
+        //check column
+        for i in 0..<boardSize {
+            var goalNum = 0
+            for j in stride(from: 0, to: boardSize*boardSize, by: boardSize){
+                if board[i + j] == true {
+                    goalNum = goalNum + 1
+                }else {
+                    break
+                }
+            }
+            if goalNum == boardSize {
+                line = line + 1
+            }
+        }
+        
+        //check diagonal
+        var goalNum = 0
+        for i in stride(from: 0, to: boardSize*boardSize, by: boardSize + 1){
+            if board[i] == true {
+                goalNum = goalNum + 1
+            }else {
+                break
+            }
+        }
+        if goalNum == boardSize {
+            line = line + 1
+        }
+        
+        //check another diagonal
+        goalNum = 0
+        for i in stride(from: boardSize - 1, to: boardSize*boardSize - boardSize + 1, by: boardSize - 1){
+            if board[i] == true{
+                goalNum = goalNum + 1
+            }else {
+                break
+            }
+        }
+        if goalNum == boardSize {
+            line = line + 1
+        }
+        
+        
+        return line
+    }
+    
 }
 
 extension BGGamePageViewController: GameSettingDelegate{
@@ -137,5 +199,6 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         board[indexPath.item] = !board[indexPath.item]
         self.m_cvBoard?.reloadData()
+        print("Bingo: \(checkBingoLine())")
     }
 }
