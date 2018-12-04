@@ -111,4 +111,6 @@ class BGSettingViewController: UIViewController {
         self.view.addSubview(m_btnSubmit!)
     
     }
+    
+    
 }

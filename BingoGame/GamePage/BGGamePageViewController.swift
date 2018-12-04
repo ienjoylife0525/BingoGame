@@ -18,8 +18,16 @@ class BGGamePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSet()
+        bindUI()
     }
     
+    private func bindUI() {
+        m_btnSetting?.action = #selector(self.clickSetting)
+        
+    }
+    
+    
+    // UI Drawing
     private func viewSet() {
         self.view.backgroundColor = UIColor.white
         self.title = "Game Page"
@@ -43,6 +51,13 @@ class BGGamePageViewController: UIViewController {
         m_vBorder = UIView(frame: CGRect(x: 10, y: 180, width: self.view.frame.width - 20, height: self.view.frame.width - 20))
         m_vBorder!.backgroundColor = UIColor.gray
         self.view.addSubview(m_vBorder!)
+        
+    }
+    
+    // Function
+    @objc private func clickSetting() {
+        let m_vcSetPage = BGSettingViewController()
+        self.navigationController?.pushViewController(m_vcSetPage, animated: true)
         
     }
     
