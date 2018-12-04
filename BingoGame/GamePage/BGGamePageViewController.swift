@@ -18,11 +18,12 @@ class BGGamePageViewController: UIViewController {
     
     
     // variable
-    var boardSize:Int = 0
-    var goal:Int = 0
-    var minNum:Int = 0
-    var maxNum:Int = 0
-    var board = [Bool]()
+    var m_iBoardSize:Int = 0
+    var m_iGoal:Int = 0
+    var m_iMinNum:Int = 0
+    var m_iMaxNum:Int = 0
+    var m_aryGameBoard = [Bool]()
+    var m_iChessNum:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,100 +81,103 @@ class BGGamePageViewController: UIViewController {
         self.view.addSubview(m_cvBoard!)
         self.m_cvBoard?.delegate = self
         self.m_cvBoard?.dataSource = self
-        self.board.removeAll()
-        self.board = [Bool](repeating: false, count: boardSize*boardSize)
+        self.m_aryGameBoard.removeAll()
+        self.m_aryGameBoard = [Bool](repeating: false, count: m_iChessNum)
         
     }
     
     private func checkBingoLine() -> Int {
-        var line = 0
+        var iLine: Int = 0
         //check raw
-        for i in stride(from: 0, to: boardSize*boardSize, by: boardSize) {
+        for i in stride(from: 0, to: m_iChessNum, by: m_iBoardSize) {
             var goalNum = 0
-            for j in 0..<boardSize {
-                if board[i + j] == true {
+            for j in 0..<m_iBoardSize {
+                if m_aryGameBoard[i + j] == true {
                     goalNum = goalNum + 1
                 }else {
                     break
                 }
             }
-            if goalNum == boardSize {
-                line = line + 1
+            if goalNum == m_iBoardSize {
+                iLine = iLine + 1
             }
         }
         
         //check column
-        for i in 0..<boardSize {
+        for i in 0..<m_iBoardSize {
             var goalNum = 0
-            for j in stride(from: 0, to: boardSize*boardSize, by: boardSize){
-                if board[i + j] == true {
+            for j in stride(from: 0, to: m_iChessNum, by: m_iBoardSize){
+                if m_aryGameBoard[i + j] == true {
                     goalNum = goalNum + 1
                 }else {
                     break
                 }
             }
-            if goalNum == boardSize {
-                line = line + 1
+            if goalNum == m_iBoardSize {
+                iLine = iLine + 1
             }
         }
         
         //check diagonal
-        var goalNum = 0
-        for i in stride(from: 0, to: boardSize*boardSize, by: boardSize + 1){
-            if board[i] == true {
-                goalNum = goalNum + 1
+        var iGoalNum: Int = 0
+        for i in stride(from: 0, to: m_iChessNum, by: m_iBoardSize + 1){
+            if m_aryGameBoard[i] == true {
+                iGoalNum = iGoalNum + 1
             }else {
                 break
             }
         }
-        if goalNum == boardSize {
-            line = line + 1
+        if iGoalNum == m_iBoardSize {
+            iLine = iLine + 1
         }
         
         //check another diagonal
-        goalNum = 0
-        for i in stride(from: boardSize - 1, to: boardSize*boardSize - boardSize + 1, by: boardSize - 1){
-            if board[i] == true{
-                goalNum = goalNum + 1
+        iGoalNum = 0
+        for i in stride(from: m_iBoardSize - 1, to: m_iChessNum - m_iBoardSize + 1, by: m_iBoardSize - 1){
+            if m_aryGameBoard[i] == true{
+                iGoalNum = iGoalNum + 1
             }else {
                 break
             }
         }
-        if goalNum == boardSize {
-            line = line + 1
+        if iGoalNum == m_iBoardSize {
+            iLine = iLine + 1
         }
         
         
-        return line
+        return iLine
     }
     
 }
 
 extension BGGamePageViewController: GameSettingDelegate{
     func setSize(_ setPage: BGSettingViewController, size: Int) {
-        self.boardSize = size
+        self.m_iBoardSize = size
+        self.m_iChessNum = size * size
         self.createBoard()
     }
     
     func setGoal(_ setPage: BGSettingViewController, goal: Int) {
-        self.goal = goal
+        self.m_iGoal = goal
+        self.m_lbStatus?.text = "Bingo 0 lines. Goal: \(goal) lines"
     }
     
     func setRange(_ setPage: BGSettingViewController, min: Int, max: Int) {
-        self.minNum = min
-        self.maxNum = max
+        self.m_iMinNum = min
+        self.m_iMaxNum = max
     }
     
 }
 
 extension BGGamePageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return boardSize*boardSize
+        return m_iChessNum
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BGBoardCell
-        if board[indexPath.item] == true {
+        if m_aryGameBoard[indexPath.item] == true {
             cell.m_lbNum.backgroundColor = UIColor.darkGray
         } else {
             cell.m_lbNum.backgroundColor = UIColor.gray
@@ -184,7 +188,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let iBoardSize = (self.m_cvBoard!.frame.width / CGFloat(boardSize))
+        let iBoardSize = (self.m_cvBoard!.frame.width / CGFloat(m_iBoardSize))
         return CGSize(width: iBoardSize, height: iBoardSize)
     }
     
@@ -197,8 +201,8 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        board[indexPath.item] = !board[indexPath.item]
+        m_aryGameBoard[indexPath.item] = !m_aryGameBoard[indexPath.item]
         self.m_cvBoard?.reloadData()
-        print("Bingo: \(checkBingoLine())")
+        m_lbStatus?.text = "Bingo \(checkBingoLine()) lines. Goal: \(m_iGoal) lines"
     }
 }
