@@ -133,26 +133,63 @@ class BGSettingViewController: UIViewController {
     }
     
     @objc private func clickSubmit() {
+        if inputValid() == false {
+            return
+        }
+        self.setDelegate.setSize(self, size: Int((m_txfSize?.text)!))
+        self.setDelegate.setGoal(self, goal: Int((m_txfGoal?.text)!))
+        self.setDelegate.setRange(self, min: Int((m_txfMin?.text)!), max: Int((m_txfMax?.text)!))
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func inputValid() -> Bool {
+        //Size Check
         guard let size = m_txfSize?.text else {
             validAlert(msg: "Error")
-            return
+            return false
         }
+        if size == "" {
+            validAlert(msg: "Please input size")
+            return false
+        }
+        //Goal Check
         guard let goal = m_txfGoal?.text else {
             validAlert(msg: "Error")
-            return
+            return false
         }
+        if goal == "" {
+            validAlert(msg: "Please input goal")
+            return false
+        } else if Int(goal)! > Int(size)! * 2 + 2 {
+            validAlert(msg: "Goal maximum is \(Int(size)! * 2 + 2)")
+            return false
+        }
+        //Min & Max Check
         guard let min = m_txfMin?.text else {
             validAlert(msg: "Error")
-            return
+            return false
+        }
+        if min == "" {
+            validAlert(msg: "Please input minimum")
+            return false
         }
         guard let max = m_txfMax?.text else {
             validAlert(msg: "Error")
-            return
+            return false
         }
-        self.setDelegate.setSize(self, size: Int(size)!)
-        self.setDelegate.setRange(self, min: Int(min)!, max: Int(max)!)
-        self.setDelegate.setGoal(self, goal: Int(goal)!)
-        self.navigationController?.popViewController(animated: true)
+        if max == "" {
+            validAlert(msg: "Please input maximum")
+            return false
+        }else if Int(max)! < Int(min)! {
+            validAlert(msg: "Maximun should biger than minimum")
+            return false
+        }else if Int(max)! - Int(min)! + 1 < Int(size)! * Int(size)! {
+            validAlert(msg: "Random range should biger than chess ")
+            return false
+        }
+        
+        
+        return true
     }
     
 }
@@ -163,41 +200,14 @@ extension BGSettingViewController: UITextFieldDelegate {
         
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == m_txfSize {
-            checkSizeInputValid()
-            
-        }else if textField == m_txfGoal{
-            checkGoalInputValid()
-        }
-        
-    
-    }
-    
-    private func checkSizeInputValid() {
-        if m_txfSize?.text == "" {
-            self.validAlert(msg: "Size can't be empty")
-        }
-    }
-    
-    private func checkGoalInputValid() {
-        if m_txfGoal?.text == "" {
-            self.validAlert(msg: "Goal can't be empty")
-        }
-        if m_txfGoal?.text == "0" {
-            self.validAlert(msg: "Need a Goal to win!!")
-        }
-    }
-    
-    
     
 }
 
 protocol GameSettingDelegate: class {
     
-    func setSize(_ setPage: BGSettingViewController, size: Int)
-    func setGoal(_ setPage: BGSettingViewController, goal: Int)
-    func setRange(_ setPage: BGSettingViewController, min: Int, max: Int)
+    func setSize(_ setPage: BGSettingViewController, size: Int?)
+    func setGoal(_ setPage: BGSettingViewController, goal: Int?)
+    func setRange(_ setPage: BGSettingViewController, min: Int?, max: Int?)
     
 }
 

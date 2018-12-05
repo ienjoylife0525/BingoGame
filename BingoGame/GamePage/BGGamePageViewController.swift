@@ -151,20 +151,32 @@ class BGGamePageViewController: UIViewController {
 }
 
 extension BGGamePageViewController: GameSettingDelegate{
-    func setSize(_ setPage: BGSettingViewController, size: Int) {
-        self.m_iBoardSize = size
-        self.m_iChessNum = size * size
+    func setSize(_ setPage: BGSettingViewController, size: Int?) {
+        guard let iInputSize = size else {
+            return
+        }
+        self.m_iBoardSize = iInputSize
+        self.m_iChessNum = iInputSize * iInputSize
         self.createBoard()
     }
     
-    func setGoal(_ setPage: BGSettingViewController, goal: Int) {
-        self.m_iGoal = goal
-        self.m_lbStatus?.text = "Bingo 0 lines. Goal: \(goal) lines"
+    func setGoal(_ setPage: BGSettingViewController, goal: Int?) {
+        guard let iInputGoal = goal else {
+            return
+        }
+        self.m_iGoal = iInputGoal
+        self.m_lbStatus?.text = "Bingo 0 lines. Goal: \(iInputGoal) lines"
     }
     
-    func setRange(_ setPage: BGSettingViewController, min: Int, max: Int) {
-        self.m_iMinNum = min
-        self.m_iMaxNum = max
+    func setRange(_ setPage: BGSettingViewController, min: Int?, max: Int?) {
+        guard let iInputMin = min else {
+            return
+        }
+        guard let iInputMax = max else {
+            return
+        }
+        self.m_iMinNum = iInputMin
+        self.m_iMaxNum = iInputMax
     }
     
 }
