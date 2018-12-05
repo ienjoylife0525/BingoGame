@@ -136,9 +136,9 @@ class BGSettingViewController: UIViewController {
         if inputValid() == false {
             return
         }
+        self.setDelegate.setRange(self, min: Int((m_txfMin?.text)!), max: Int((m_txfMax?.text)!))
         self.setDelegate.setSize(self, size: Int((m_txfSize?.text)!))
         self.setDelegate.setGoal(self, goal: Int((m_txfGoal?.text)!))
-        self.setDelegate.setRange(self, min: Int((m_txfMin?.text)!), max: Int((m_txfMax?.text)!))
         self.navigationController?.popViewController(animated: true)
     }
     
