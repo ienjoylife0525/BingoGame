@@ -1,0 +1,6 @@
+framework module Pods_BingoGame {
+  umbrella header "Pods-BingoGame-umbrella.h"
+
+  export *
+  module * { export * }
+}

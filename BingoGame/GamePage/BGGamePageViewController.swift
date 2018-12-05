@@ -34,6 +34,7 @@ class BGGamePageViewController: UIViewController {
     var m_bBoardInput: Bool = false
     var m_BoardStatus: BoardStatus = .Default
     var m_aryBoardNum = [Int]()
+    var m_iInputIndex = 0
     
     
     override func viewDidLoad() {
@@ -103,6 +104,16 @@ class BGGamePageViewController: UIViewController {
         self.navigationController?.pushViewController(m_vcSetPage, animated: true)
     }
     
+    @objc private func clickGame() {
+        switch m_BoardStatus {
+        case .Ready:
+            m_cvBoard?.reloadData()
+            m_BoardStatus = .Gaming
+        default:
+            return 
+        }
+    }
+    
     private func createBoard() {
         self.m_aryGameBoard.removeAll()
         self.m_aryGameBoard = [Bool](repeating: false, count: m_iChessNum)
@@ -111,6 +122,7 @@ class BGGamePageViewController: UIViewController {
         m_cvBoard = UICollectionView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10), collectionViewLayout: layout)
         m_cvBoard?.register(BGBoardCell.self, forCellWithReuseIdentifier: "Cell")
         m_cvBoard!.backgroundColor = UIColor.gray
+        m_cvBoard?.isScrollEnabled = false
         self.view.addSubview(m_cvBoard!)
         self.m_cvBoard?.delegate = self
         self.m_cvBoard?.dataSource = self
@@ -197,6 +209,13 @@ class BGGamePageViewController: UIViewController {
         return iLine
     }
     
+    private func validAlert(msg: String){
+        let alertController = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "確定", style: .default, handler: nil)
+        alertController.addAction(confirm)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
 }
 
 extension BGGamePageViewController: GameSettingDelegate{
@@ -243,6 +262,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
         } else {
             cell.m_txfNum.backgroundColor = UIColor.gray
         }
+        cell.setDataDelegate = self
         cell.m_txfNum.text = "\(m_aryBoardNum[indexPath.item])"
         
         return cell
@@ -262,8 +282,46 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        m_aryGameBoard[indexPath.item] = !m_aryGameBoard[indexPath.item]
-        self.m_cvBoard?.reloadData()
-        m_lbStatus?.text = "Bingo \(checkBingoLine()) lines. Goal: \(m_iGoal) lines"
+        switch m_BoardStatus {
+        case .Gaming:
+            m_aryGameBoard[indexPath.item] = !m_aryGameBoard[indexPath.item]
+            self.m_cvBoard?.reloadData()
+            m_lbStatus?.text = "Bingo \(checkBingoLine()) lines. Goal: \(m_iGoal) lines"
+        default:
+            return
+        }
+        
     }
 }
+
+extension BGGamePageViewController: CellInputDataDelegate{
+    func setCellNum(_ setCell: UICollectionViewCell, data: String) {
+        let index = m_cvBoard?.indexPath(for: setCell)?.item
+        for i in 0..<self.m_iChessNum {
+            if Int(data)! == m_aryBoardNum[i] && i != index{
+                self.validAlert(msg: "Number Repeat!!")
+                self.m_cvBoard?.reloadData()
+                return
+            }
+        }
+        m_aryBoardNum[index!] = Int(data)!
+        self.m_cvBoard?.reloadData()
+        
+    }
+    
+    
+}
+
+protocol CellInputDataDelegate: class {
+    func setCellNum(_ setCell: UICollectionViewCell, data: String)
+}
+
+protocol GameSettingDelegate: class {
+    
+    func setSize(_ setPage: BGSettingViewController, size: Int?)
+    func setGoal(_ setPage: BGSettingViewController, goal: Int?)
+    func setRange(_ setPage: BGSettingViewController, min: Int?, max: Int?)
+    
+}
+
+

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BGSettingViewController: UIViewController {
+class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     
     // UI
@@ -26,8 +26,6 @@ class BGSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSet()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        self.view.addGestureRecognizer(tap)
         m_txfSize?.delegate = self
         m_txfGoal?.delegate = self
         m_txfMin?.delegate = self
@@ -124,6 +122,7 @@ class BGSettingViewController: UIViewController {
     
     }
     
+    
     // Function
     private func validAlert(msg: String){
         let alertController = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
@@ -191,23 +190,6 @@ class BGSettingViewController: UIViewController {
         
         return true
     }
-    
-}
-
-extension BGSettingViewController: UITextFieldDelegate {
-    @objc func dismissKeyboard() {
-        self.view.endEditing(true)
-        
-    }
-    
-    
-}
-
-protocol GameSettingDelegate: class {
-    
-    func setSize(_ setPage: BGSettingViewController, size: Int?)
-    func setGoal(_ setPage: BGSettingViewController, goal: Int?)
-    func setRange(_ setPage: BGSettingViewController, min: Int?, max: Int?)
     
 }
 

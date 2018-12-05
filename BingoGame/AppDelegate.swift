@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nav: UINavigationController = UINavigationController(rootViewController: mainPage)
         window?.rootViewController = nav
         window!.makeKeyAndVisible()
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 20
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         return true
     }
 

@@ -17,6 +17,7 @@
 		6EE16BE721B599B2009336FA /* BGGamePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BE621B599B2009336FA /* BGGamePageViewController.swift */; };
 		6EE16BEA21B599D7009336FA /* BGSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BE921B599D7009336FA /* BGSettingViewController.swift */; };
 		6EE16BEC21B635FF009336FA /* BGBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BEB21B635FF009336FA /* BGBoardCell.swift */; };
+		FEEEDE13DC62AF5FCC62F438 /* Pods_BingoGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77588CCCC6A43464E2EB5FF9 /* Pods_BingoGame.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28F18A61C250599A4434868B /* Pods-BingoGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BingoGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-BingoGame/Pods-BingoGame.release.xcconfig"; sourceTree = "<group>"; };
+		3C2A6691398D65E161FC088A /* Pods-BingoGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BingoGame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BingoGame/Pods-BingoGame.debug.xcconfig"; sourceTree = "<group>"; };
 		6EE16BB321B59927009336FA /* BingoGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BingoGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE16BB621B59927009336FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EE16BB821B59927009336FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 		6EE16BE621B599B2009336FA /* BGGamePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGGamePageViewController.swift; sourceTree = "<group>"; };
 		6EE16BE921B599D7009336FA /* BGSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGSettingViewController.swift; sourceTree = "<group>"; };
 		6EE16BEB21B635FF009336FA /* BGBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGBoardCell.swift; sourceTree = "<group>"; };
+		77588CCCC6A43464E2EB5FF9 /* Pods_BingoGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BingoGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEEEDE13DC62AF5FCC62F438 /* Pods_BingoGame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		114D1939C81B421C1FD3739E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C2A6691398D65E161FC088A /* Pods-BingoGame.debug.xcconfig */,
+				28F18A61C250599A4434868B /* Pods-BingoGame.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		22703BB0EB73AF06B3FE7229 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77588CCCC6A43464E2EB5FF9 /* Pods_BingoGame.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6EE16BAA21B59927009336FA = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +109,8 @@
 				6EE16BCA21B5992A009336FA /* BingoGameTests */,
 				6EE16BD521B5992A009336FA /* BingoGameUITests */,
 				6EE16BB421B59927009336FA /* Products */,
+				114D1939C81B421C1FD3739E /* Pods */,
+				22703BB0EB73AF06B3FE7229 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,9 +189,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EE16BDB21B5992A009336FA /* Build configuration list for PBXNativeTarget "BingoGame" */;
 			buildPhases = (
+				CE055A2B8D919DC9A3B962D3 /* [CP] Check Pods Manifest.lock */,
 				6EE16BAF21B59927009336FA /* Sources */,
 				6EE16BB021B59927009336FA /* Frameworks */,
 				6EE16BB121B59927009336FA /* Resources */,
+				64CB13200244571A03762B4C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -283,6 +309,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		64CB13200244571A03762B4C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BingoGame/Pods-BingoGame-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BingoGame/Pods-BingoGame-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE055A2B8D919DC9A3B962D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BingoGame-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6EE16BAF21B59927009336FA /* Sources */ = {
@@ -466,6 +531,7 @@
 		};
 		6EE16BDC21B5992A009336FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C2A6691398D65E161FC088A /* Pods-BingoGame.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -484,6 +550,7 @@
 		};
 		6EE16BDD21B5992A009336FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28F18A61C250599A4434868B /* Pods-BingoGame.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

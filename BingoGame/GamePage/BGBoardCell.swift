@@ -13,6 +13,7 @@ class BGBoardCell: UICollectionViewCell {
         
     var m_lbNum: UILabel!
     var m_txfNum: UITextField!
+    weak var setDataDelegate: CellInputDataDelegate!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +23,9 @@ class BGBoardCell: UICollectionViewCell {
         m_txfNum.textColor = UIColor.white
         m_txfNum.layer.borderWidth = 1
         m_txfNum.layer.borderColor = UIColor.white.cgColor
+        m_txfNum.keyboardType = .numberPad
         self.addSubview(m_txfNum)
+        m_txfNum.delegate = self
         
        
     }
@@ -33,5 +36,12 @@ class BGBoardCell: UICollectionViewCell {
 }
 
 extension BGBoardCell: UITextFieldDelegate {
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let data = textField.text else {
+            return 
+        }
+        self.setDataDelegate.setCellNum(self, data: data)
+    }
 }
+
+
