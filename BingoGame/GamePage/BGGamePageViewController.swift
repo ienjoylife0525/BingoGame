@@ -41,12 +41,13 @@ class BGGamePageViewController: UIViewController {
         super.viewDidLoad()
         viewSet()
         bindUI()
+        
 
     }
     
     private func bindUI() {
         m_btnSetting?.action = #selector(self.clickSetting)
-        
+        m_btnGameStart?.addTarget(self, action: #selector(self.clickGame), for: .touchUpInside)
     }
     
     
@@ -55,9 +56,9 @@ class BGGamePageViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         self.title = "Game Page"
         settingBtnSet()
-        boardViewSet()
         statusLabelSet()
         startBtnSet()
+        boardViewSet()
     }
     
     private func settingBtnSet() {
@@ -72,16 +73,19 @@ class BGGamePageViewController: UIViewController {
         self.view.addSubview(m_lbStatus!)
     }
     
-    private func boardViewSet() {
-        let defaultBoard: UIView = UIView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10))
-        defaultBoard.backgroundColor = UIColor.gray
-        self.view.addSubview(defaultBoard)
-        
-    }
+//    private func defaultViewSet() {
+//        let defaultBoard: UIView = UIView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10))
+//        defaultBoard.backgroundColor = UIColor.gray
+//        self.view.addSubview(defaultBoard)
+//
+//    }
     
     private func startBtnSet() {
         m_btnGameStart = UIButton(frame: CGRect(x: 90, y: 580, width: 200, height: 40))
         m_btnGameStart!.layer.cornerRadius = 10
+    }
+    
+    private func startBtnChange() {
         switch m_BoardStatus {
         case .Ready:
             m_btnGameStart!.setTitle("Game Start", for: .normal)
@@ -93,8 +97,20 @@ class BGGamePageViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    private func boardViewSet() {
+        let layout = UICollectionViewFlowLayout()
+        m_cvBoard = UICollectionView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10), collectionViewLayout: layout)
+        m_cvBoard?.register(BGBoardCell.self, forCellWithReuseIdentifier: "Cell")
+        m_cvBoard!.backgroundColor = UIColor.gray
+        m_cvBoard?.isScrollEnabled = false
+        self.m_cvBoard?.delegate = self
+        self.m_cvBoard?.dataSource = self
+        self.view.addSubview(m_cvBoard!)
         
     }
+    
     
     
     // Function
@@ -103,14 +119,13 @@ class BGGamePageViewController: UIViewController {
         m_vcSetPage.setDelegate = self
         self.navigationController?.pushViewController(m_vcSetPage, animated: true)
     }
-    
     @objc private func clickGame() {
         switch m_BoardStatus {
         case .Ready:
-            m_cvBoard?.reloadData()
             m_BoardStatus = .Gaming
+            m_cvBoard?.reloadData()
         default:
-            return 
+            return
         }
     }
     
@@ -118,16 +133,10 @@ class BGGamePageViewController: UIViewController {
         self.m_aryGameBoard.removeAll()
         self.m_aryGameBoard = [Bool](repeating: false, count: m_iChessNum)
         randonBoard()
-        let layout = UICollectionViewFlowLayout()
-        m_cvBoard = UICollectionView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10), collectionViewLayout: layout)
-        m_cvBoard?.register(BGBoardCell.self, forCellWithReuseIdentifier: "Cell")
-        m_cvBoard!.backgroundColor = UIColor.gray
-        m_cvBoard?.isScrollEnabled = false
-        self.view.addSubview(m_cvBoard!)
-        self.m_cvBoard?.delegate = self
-        self.m_cvBoard?.dataSource = self
+        //Draw board
         self.m_BoardStatus = .Ready
-        self.startBtnSet()
+        self.m_cvBoard?.reloadData()
+        self.startBtnChange()
         
     }
     
@@ -252,18 +261,34 @@ extension BGGamePageViewController: GameSettingDelegate{
 extension BGGamePageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch m_BoardStatus {
+        case .Default:
+            return 0
+        default:
+            break
+        }
         return m_iChessNum
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BGBoardCell
-        if m_aryGameBoard[indexPath.item] == true {
-            cell.m_txfNum.backgroundColor = UIColor.darkGray
-        } else {
-            cell.m_txfNum.backgroundColor = UIColor.gray
+        switch self.m_BoardStatus {
+        case .Ready:
+
+            cell.texfieldStyle()
+            cell.m_txfNum.text = "\(m_aryBoardNum[indexPath.item])"
+        case .Gaming:
+            cell.labelStyle()
+            cell.m_lbNum.text = "\(m_aryBoardNum[indexPath.item])"
+            if m_aryGameBoard[indexPath.item] == true {
+                cell.m_lbNum.backgroundColor = UIColor.darkGray
+            } else {
+                cell.m_lbNum.backgroundColor = UIColor.gray
+            }
+        default:
+            break
         }
         cell.setDataDelegate = self
-        cell.m_txfNum.text = "\(m_aryBoardNum[indexPath.item])"
         
         return cell
     }

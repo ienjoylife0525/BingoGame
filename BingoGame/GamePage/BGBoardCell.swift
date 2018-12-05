@@ -18,6 +18,20 @@ class BGBoardCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.gray
+    }
+    
+    func labelStyle() {
+        m_lbNum = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        m_lbNum.textAlignment = .center
+        m_lbNum.textColor = UIColor.white
+        m_lbNum.layer.borderWidth = 1
+        m_lbNum.backgroundColor = UIColor.init(red: 255 / 255, green: 251 / 255, blue: 189 / 255, alpha: 1)
+        self.addSubview(m_lbNum)
+        self.m_txfNum.removeFromSuperview()
+        
+    }
+    
+    func texfieldStyle() {
         m_txfNum = UITextField.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         m_txfNum.textAlignment = .center
         m_txfNum.textColor = UIColor.white
@@ -27,7 +41,6 @@ class BGBoardCell: UICollectionViewCell {
         self.addSubview(m_txfNum)
         m_txfNum.delegate = self
         
-       
     }
     
     required init?(coder aDecoder: NSCoder) {
