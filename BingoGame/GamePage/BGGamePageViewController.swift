@@ -69,16 +69,9 @@ class BGGamePageViewController: UIViewController {
     private func statusLabelSet() {
         m_lbStatus = UILabel(frame: CGRect(x: 10, y: 100, width: self.view.frame.width - 30, height: 40))
         m_lbStatus!.text = "Text:SetFirst".localized()
-        m_lbStatus!.textColor = UIColor.darkGray
+        m_lbStatus!.textColor = UIColor.rgb(kCQueenBlue)
         self.view.addSubview(m_lbStatus!)
     }
-    
-//    private func defaultViewSet() {
-//        let defaultBoard: UIView = UIView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10))
-//        defaultBoard.backgroundColor = UIColor.gray
-//        self.view.addSubview(defaultBoard)
-//
-//    }
     
     private func startBtnSet() {
         m_btnGameStart = UIButton(frame: CGRect(x: 90, y: 580, width: 200, height: 40))
@@ -93,11 +86,11 @@ class BGGamePageViewController: UIViewController {
         case .Ready:
             m_btnGameStart?.isHidden = false
             m_btnGameStart!.setTitle("Text:GameStart".localized(), for: .normal)
-            m_btnGameStart!.backgroundColor = UIColor.init(red: 127 / 255, green: 176 / 255, blue: 105 / 255, alpha: 1)
+            m_btnGameStart!.backgroundColor = UIColor.rgb(kCOliveDrab)
         case .Gaming:
             m_btnGameStart?.isHidden = false
             m_btnGameStart!.setTitle("Text:GameEnd".localized(), for: .normal)
-            m_btnGameStart!.backgroundColor = UIColor.init(red: 202 / 255, green: 60 / 255, blue: 37 / 255, alpha: 1)
+            m_btnGameStart!.backgroundColor = UIColor.rgb(kCVividRed)
 
         }
     }
@@ -106,7 +99,7 @@ class BGGamePageViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         m_cvBoard = UICollectionView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10), collectionViewLayout: layout)
         m_cvBoard?.register(BGBoardCell.self, forCellWithReuseIdentifier: "Cell")
-        m_cvBoard!.backgroundColor = UIColor.gray
+        m_cvBoard!.backgroundColor = UIColor.rgb(kCBlackOlive)
         m_cvBoard?.isScrollEnabled = false
         self.m_cvBoard?.delegate = self
         self.m_cvBoard?.dataSource = self
@@ -294,9 +287,9 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
             cell.m_lbNum.isHidden = false
             cell.m_lbNum!.text = "\(m_aryBoardNum[indexPath.item])"
             if m_aryGameBoard[indexPath.item] == true {
-                cell.m_lbNum?.backgroundColor = UIColor(red: 230 / 255, green: 170 / 255, blue: 104 / 255, alpha: 1)
+                cell.m_lbNum?.backgroundColor = UIColor.rgb(kCCoolBlack)
             } else {
-                cell.m_lbNum?.backgroundColor = UIColor(red: 163 / 255, green: 159 / 255, blue: 109 / 255, alpha: 1)
+                cell.m_lbNum?.backgroundColor = UIColor.rgb(kCBlackOlive)
             }
         default:
             break

@@ -50,7 +50,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     private func sizeTitleSet() {
         let m_lbSizeTitle = UILabel.init(frame: CGRect(x: 30, y: 95, width: 300, height: 40))
         m_lbSizeTitle.text = "Text:SizeInput".localized()
-        m_lbSizeTitle.textColor = UIColor.black
+        m_lbSizeTitle.textColor = UIColor.rgb(kCQueenBlue)
         self.view.addSubview(m_lbSizeTitle)
     }
     
@@ -66,7 +66,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     private func goalTitleSet() {
         let m_lbGoalTitle = UILabel.init(frame: CGRect(x: 30, y: 200, width: self.view.frame.width - 80, height: 40))
         m_lbGoalTitle.text = "Text:GoalInput".localized()
-        m_lbGoalTitle.textColor = UIColor.black
+        m_lbGoalTitle.textColor = UIColor.rgb(kCQueenBlue)
         self.view.addSubview(m_lbGoalTitle)
     }
     
@@ -83,7 +83,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     private func minTitleSet() {
         let m_lbMinTitle = UILabel.init(frame: CGRect(x: 30, y: 300, width: 50, height: 40))
         m_lbMinTitle.text = "Text:Min".localized()
-        m_lbMinTitle.textColor = UIColor.black
+        m_lbMinTitle.textColor = UIColor.rgb(kCQueenBlue)
         self.view.addSubview(m_lbMinTitle)
     }
     
@@ -99,7 +99,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     private func maxTitleSet() {
         let m_lbMaxTitle = UILabel.init(frame: CGRect(x: 190, y: 300, width: 50, height: 40))
         m_lbMaxTitle.text = "Text:Max".localized()
-        m_lbMaxTitle.textColor = UIColor.black
+        m_lbMaxTitle.textColor = UIColor.rgb(kCQueenBlue)
         self.view.addSubview(m_lbMaxTitle)
     }
     
@@ -115,7 +115,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     private func submitBtnSet() {
         m_btnSubmit = UIButton.init(frame: CGRect(x: 30, y: 400, width: self.view.frame.width - 80, height: 40))
         m_btnSubmit!.setTitle("Text:SetDone".localized(), for: .normal)
-        m_btnSubmit!.setTitleColor(UIColor.blue, for: .normal)
+        m_btnSubmit!.backgroundColor = UIColor.rgb(0x849324)
         m_btnSubmit!.layer.borderWidth = 1
         m_btnSubmit!.layer.cornerRadius = 10
         self.view.addSubview(m_btnSubmit!)
