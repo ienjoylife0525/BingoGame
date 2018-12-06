@@ -226,7 +226,7 @@ class BGGamePageViewController: UIViewController {
         if iGoalNum == m_iBoardSize {
             iLine = iLine + 1
         }
-                
+        
         return iLine
     }
     
