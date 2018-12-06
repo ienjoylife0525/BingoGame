@@ -83,19 +83,22 @@ class BGGamePageViewController: UIViewController {
     private func startBtnSet() {
         m_btnGameStart = UIButton(frame: CGRect(x: 90, y: 580, width: 200, height: 40))
         m_btnGameStart!.layer.cornerRadius = 10
+        self.view.addSubview(m_btnGameStart!)
     }
     
     private func startBtnChange() {
         switch m_BoardStatus {
+        case .Default:
+            m_btnGameStart?.isHidden = true
         case .Ready:
+            m_btnGameStart?.isHidden = false
             m_btnGameStart!.setTitle("Game Start", for: .normal)
             m_btnGameStart!.backgroundColor = UIColor.init(red: 127 / 255, green: 176 / 255, blue: 105 / 255, alpha: 1)
-            self.view.addSubview(m_btnGameStart!)
         case .Gaming:
+            m_btnGameStart?.isHidden = false
             m_btnGameStart!.setTitle("End Game", for: .normal)
             m_btnGameStart!.backgroundColor = UIColor.init(red: 202 / 255, green: 60 / 255, blue: 37 / 255, alpha: 1)
-        default:
-            break
+
         }
     }
     
@@ -122,11 +125,18 @@ class BGGamePageViewController: UIViewController {
     @objc private func clickGame() {
         switch m_BoardStatus {
         case .Ready:
+            //Become Gaming
             m_BoardStatus = .Gaming
             m_cvBoard?.reloadData()
+            m_btnSetting?.isEnabled = false
+            startBtnChange()
         case .Gaming:
+            //Become Default
             m_BoardStatus = .Default
             m_cvBoard?.reloadData()
+            startBtnChange()
+            m_btnSetting?.isEnabled = true
+            m_lbStatus?.text = "Set the game first !!"
         default:
             return
         }
@@ -216,8 +226,7 @@ class BGGamePageViewController: UIViewController {
         if iGoalNum == m_iBoardSize {
             iLine = iLine + 1
         }
-        
-        
+                
         return iLine
     }
     
@@ -315,7 +324,12 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
         case .Gaming:
             m_aryGameBoard[indexPath.item] = !m_aryGameBoard[indexPath.item]
             self.m_cvBoard?.reloadData()
-            m_lbStatus?.text = "Bingo \(checkBingoLine()) lines. Goal: \(m_iGoal) lines"
+            if checkBingoLine() >= m_iGoal {
+                m_lbStatus?.text = "Congratualation !! You Win !!"
+            }else {
+                m_lbStatus?.text = "Bingo \(checkBingoLine()) lines. Goal: \(m_iGoal) lines"
+
+            }
         default:
             return
         }
