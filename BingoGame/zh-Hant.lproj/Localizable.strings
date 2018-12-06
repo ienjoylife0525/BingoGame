@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  BingoGame
+
+  Created by Patato on 2018/12/6.
+  Copyright © 2018 Patato. All rights reserved.
+*/
+
+"Text:GamePage" = "Bingo 遊戲";
+"Text:SetPage" = "設定";
+"Text:Set" = "設定";
+"Text:GameStart" = "遊戲開始";
+"Text:GameEnd" = "遊戲結束";
+"Text:Win" = "恭喜您獲勝了！";
+"Text:BingoLine" = "Bingo:%d條";
+"Text:GoalLine" = "目標:%d條";
+"Text:SetFirst" = "請先設定遊戲";
+"Text:SizeInput" = "棋盤尺寸";
+"Text:SizeHolder" = "請輸入尺寸";
+"Text:GoalInput" = "獲勝條件";
+"Text:GoalHolder" = "請輸入獲勝條件";
+"Text:Min" = "最小值";
+"Text:Max" = "最大值";
+"Text:SetDone" = "設定完成";
+
+// Alert
+"Alert:Title" = "警告";
+"Alert:Action" = "確定";
+"Alert:Error" = "錯誤";
+"Alert:NumRepeat" = "數字重複";
+"Alert:NoSize" = "請輸入尺寸";
+"Alert:NoGoal" = "請輸入獲勝條件";
+"Alert:NoMin" = "請輸入最小值";
+"Alert:NoMax" = "請輸入最大值";
+"Alert:WrongGoal" = "目標最大值 %d";
+"Alert:WrongRange" = "隨機範圍應大於棋格總數";
+"Alert:WrongMax" = "最大值應大於最小值";
+

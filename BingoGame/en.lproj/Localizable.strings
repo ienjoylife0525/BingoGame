@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  BingoGame
+
+  Created by Patato on 2018/12/6.
+  Copyright © 2018 Patato. All rights reserved.
+*/
+
+"Text:GamePage" = "Bingo Game";
+"Text:SetPage" = "Setting Page";
+"Text:Set" = "Setting";
+"Text:GameStart" = "Game Start";
+"Text:GameEnd" = "End Game";
+"Text:Win" = "Congratulation! You Win!!";
+"Text:BingoLine" = "Bingo: %d lines";
+"Text:GoalLine" = "Goal: %d lines";
+"Text:SetFirst" = "Set the game first!!";
+"Text:SizeInput" = "Board Size";
+"Text:SizeHolder" = "Please enter size";
+"Text:GoalInput" = "Win Goal";
+"Text:GoalHolder" = "Please enter goal";
+"Text:Min" = "Min";
+"Text:Max" = "Max";
+"Text:SetDone" = "Settin Done";
+
+// Alert
+"Alert:Title" = "Alert";
+"Alert:Action" = "Ok";
+"Alert:Error" = "Error";
+"Alert:NumRepeat" = "Number Repeat";
+"Alert:NoSize" = "Please input size";
+"Alert:NoGoal" = "Please input goal";
+"Alert:NoMin" = "Please input minimum";
+"Alert:NoMax" = "Please input maximum";
+"Alert:WrongGoal" = "Goal maximum is %d";
+"Alert:WrongRange" = "Random range should biger than chess";
+"Alert:WrongMax" = "Maximum should biger than minimum";

@@ -34,7 +34,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func viewSet() {
-        self.navigationItem.title = "Game Set"
+        self.navigationItem.title = "Text:SetPage".localized()
         self.view.backgroundColor = UIColor.white
         sizeTextFieldSet()
         sizeTitleSet()
@@ -49,14 +49,14 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func sizeTitleSet() {
         let m_lbSizeTitle = UILabel.init(frame: CGRect(x: 30, y: 95, width: 300, height: 40))
-        m_lbSizeTitle.text = "Border Size"
+        m_lbSizeTitle.text = "Text:SizeInput".localized()
         m_lbSizeTitle.textColor = UIColor.black
         self.view.addSubview(m_lbSizeTitle)
     }
     
     private func sizeTextFieldSet() {
         m_txfSize = UITextField.init(frame: CGRect(x: 30, y: 140, width: self.view.frame.width - 80, height: 40))
-        m_txfSize!.placeholder = "Please enter size"
+        m_txfSize!.placeholder = "Text:SizeHolder".localized()
         m_txfSize!.borderStyle = .roundedRect
         m_txfSize!.keyboardType = .numberPad
         m_txfSize!.returnKeyType = .done
@@ -65,14 +65,14 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func goalTitleSet() {
         let m_lbGoalTitle = UILabel.init(frame: CGRect(x: 30, y: 200, width: self.view.frame.width - 80, height: 40))
-        m_lbGoalTitle.text = "Win Goal"
+        m_lbGoalTitle.text = "Text:GoalInput".localized()
         m_lbGoalTitle.textColor = UIColor.black
         self.view.addSubview(m_lbGoalTitle)
     }
     
     private func goalTextFieldSet() {
         m_txfGoal = UITextField.init(frame: CGRect(x: 30, y: 245, width: self.view.frame.width - 80 , height: 40))
-        m_txfGoal!.placeholder = "Please enter goal"
+        m_txfGoal!.placeholder = "Text:GoalHolder".localized()
         m_txfGoal!.borderStyle = .roundedRect
         m_txfGoal!.keyboardType = .numberPad
         m_txfGoal!.returnKeyType = .done
@@ -82,7 +82,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func minTitleSet() {
         let m_lbMinTitle = UILabel.init(frame: CGRect(x: 30, y: 300, width: 50, height: 40))
-        m_lbMinTitle.text = "Min"
+        m_lbMinTitle.text = "Text:Min".localized()
         m_lbMinTitle.textColor = UIColor.black
         self.view.addSubview(m_lbMinTitle)
     }
@@ -98,7 +98,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func maxTitleSet() {
         let m_lbMaxTitle = UILabel.init(frame: CGRect(x: 190, y: 300, width: 50, height: 40))
-        m_lbMaxTitle.text = "Max"
+        m_lbMaxTitle.text = "Text:Max".localized()
         m_lbMaxTitle.textColor = UIColor.black
         self.view.addSubview(m_lbMaxTitle)
     }
@@ -114,7 +114,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func submitBtnSet() {
         m_btnSubmit = UIButton.init(frame: CGRect(x: 30, y: 400, width: self.view.frame.width - 80, height: 40))
-        m_btnSubmit!.setTitle("Game Start", for: .normal)
+        m_btnSubmit!.setTitle("Text:SetDone".localized(), for: .normal)
         m_btnSubmit!.setTitleColor(UIColor.blue, for: .normal)
         m_btnSubmit!.layer.borderWidth = 1
         m_btnSubmit!.layer.cornerRadius = 10
@@ -125,8 +125,8 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     // Function
     private func validAlert(msg: String){
-        let alertController = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "確定", style: .default, handler: nil)
+        let alertController = UIAlertController(title: "Alert:Title".localized(), message: msg, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Alert:Action".localized(), style: .default, handler: nil)
         alertController.addAction(confirm)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -144,46 +144,42 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     private func inputValid() -> Bool {
         //Size Check
         guard let size = m_txfSize?.text else {
-            validAlert(msg: "Error")
             return false
         }
         if size == "" {
-            validAlert(msg: "Please input size")
+            validAlert(msg: "Alert:NoSize".localized())
             return false
         }
         //Goal Check
         guard let goal = m_txfGoal?.text else {
-            validAlert(msg: "Error")
             return false
         }
         if goal == "" {
-            validAlert(msg: "Please input goal")
+            validAlert(msg: "Alert:NoGoal".localized())
             return false
         } else if Int(goal)! > Int(size)! * 2 + 2 {
-            validAlert(msg: "Goal maximum is \(Int(size)! * 2 + 2)")
+            validAlert(msg: "Alert:WrongGoal".localized(Int(size)! * 2 + 2))
             return false
         }
         //Min & Max Check
         guard let min = m_txfMin?.text else {
-            validAlert(msg: "Error")
             return false
         }
         if min == "" {
-            validAlert(msg: "Please input minimum")
+            validAlert(msg: "Alert:NoMin".localized())
             return false
         }
         guard let max = m_txfMax?.text else {
-            validAlert(msg: "Error")
             return false
         }
         if max == "" {
-            validAlert(msg: "Please input maximum")
+            validAlert(msg: "Alert:NoMax".localized())
             return false
         }else if Int(max)! < Int(min)! {
-            validAlert(msg: "Maximun should biger than minimum")
+            validAlert(msg: "Alert:WrongMax".localized())
             return false
         }else if Int(max)! - Int(min)! + 1 < Int(size)! * Int(size)! {
-            validAlert(msg: "Random range should biger than chess ")
+            validAlert(msg: "Alert:WrongRange".localized())
             return false
         }
         

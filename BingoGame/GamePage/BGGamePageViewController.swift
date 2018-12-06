@@ -54,7 +54,7 @@ class BGGamePageViewController: UIViewController {
     // UI Drawing
     private func viewSet() {
         self.view.backgroundColor = UIColor.white
-        self.title = "Game Page"
+        self.title = "Text:GamePage".localized()
         settingBtnSet()
         statusLabelSet()
         startBtnSet()
@@ -62,13 +62,13 @@ class BGGamePageViewController: UIViewController {
     }
     
     private func settingBtnSet() {
-        m_btnSetting = UIBarButtonItem(title: "Setting", style: .plain, target: self, action: nil)
+        m_btnSetting = UIBarButtonItem(title: "Text:Set".localized(), style: .plain, target: self, action: nil)
         self.navigationItem.rightBarButtonItem = m_btnSetting
     }
     
     private func statusLabelSet() {
         m_lbStatus = UILabel(frame: CGRect(x: 10, y: 100, width: self.view.frame.width - 30, height: 40))
-        m_lbStatus!.text = "Set the game first !!"
+        m_lbStatus!.text = "Text:SetFirst".localized()
         m_lbStatus!.textColor = UIColor.darkGray
         self.view.addSubview(m_lbStatus!)
     }
@@ -92,11 +92,11 @@ class BGGamePageViewController: UIViewController {
             m_btnGameStart?.isHidden = true
         case .Ready:
             m_btnGameStart?.isHidden = false
-            m_btnGameStart!.setTitle("Game Start", for: .normal)
+            m_btnGameStart!.setTitle("Text:GameStart".localized(), for: .normal)
             m_btnGameStart!.backgroundColor = UIColor.init(red: 127 / 255, green: 176 / 255, blue: 105 / 255, alpha: 1)
         case .Gaming:
             m_btnGameStart?.isHidden = false
-            m_btnGameStart!.setTitle("End Game", for: .normal)
+            m_btnGameStart!.setTitle("Text:GameEnd".localized(), for: .normal)
             m_btnGameStart!.backgroundColor = UIColor.init(red: 202 / 255, green: 60 / 255, blue: 37 / 255, alpha: 1)
 
         }
@@ -136,7 +136,7 @@ class BGGamePageViewController: UIViewController {
             m_cvBoard?.reloadData()
             startBtnChange()
             m_btnSetting?.isEnabled = true
-            m_lbStatus?.text = "Set the game first !!"
+            m_lbStatus?.text = "Text:SetFirst".localized()
         default:
             return
         }
@@ -231,8 +231,8 @@ class BGGamePageViewController: UIViewController {
     }
     
     private func validAlert(msg: String){
-        let alertController = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "確定", style: .default, handler: nil)
+        let alertController = UIAlertController(title: "Alert:Title".localized(), message: msg, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Alert:Action".localized(), style: .default, handler: nil)
         alertController.addAction(confirm)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -254,7 +254,7 @@ extension BGGamePageViewController: GameSettingDelegate{
             return
         }
         self.m_iGoal = iInputGoal
-        self.m_lbStatus?.text = "Bingo 0 lines. Goal: \(iInputGoal) lines"
+        self.m_lbStatus?.text = "Text:BingoLine".localized(0) + "/" +  "Text:GoalLine".localized(iInputGoal)
     }
     
     func setRange(_ setPage: BGSettingViewController, min: Int?, max: Int?) {
@@ -325,9 +325,9 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
             m_aryGameBoard[indexPath.item] = !m_aryGameBoard[indexPath.item]
             self.m_cvBoard?.reloadData()
             if checkBingoLine() >= m_iGoal {
-                m_lbStatus?.text = "Congratualation !! You Win !!"
+                m_lbStatus?.text = "Text:Win".localized()
             }else {
-                m_lbStatus?.text = "Bingo \(checkBingoLine()) lines. Goal: \(m_iGoal) lines"
+                m_lbStatus?.text = "Text:BingoLine".localized(checkBingoLine()) + "/" +  "Text:GoalLine".localized(m_iGoal)
 
             }
         default:
@@ -342,7 +342,7 @@ extension BGGamePageViewController: CellInputDataDelegate{
         let index = m_cvBoard?.indexPath(for: setCell)?.item
         for i in 0..<self.m_iChessNum {
             if Int(data)! == m_aryBoardNum[i] && i != index{
-                self.validAlert(msg: "Number Repeat!!")
+                self.validAlert(msg: "Alert:NumRepeat".localized())
                 self.m_cvBoard?.reloadData()
                 return
             }
