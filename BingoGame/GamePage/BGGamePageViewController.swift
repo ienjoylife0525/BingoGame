@@ -75,7 +75,7 @@ class BGGamePageViewController: UIViewController {
     
     private func startBtnSet() {
         m_btnGameStart = UIButton(frame: CGRect(x: 90, y: 580, width: 200, height: 40))
-        m_btnGameStart!.layer.cornerRadius = 10
+        m_btnGameStart!.layer.cornerRadius = kCornerRadius
         self.view.addSubview(m_btnGameStart!)
     }
     
@@ -295,6 +295,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
             break
         }
         cell.setDataDelegate = self
+        
         
         return cell
     }

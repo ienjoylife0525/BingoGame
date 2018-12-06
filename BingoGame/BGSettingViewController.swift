@@ -116,8 +116,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
         m_btnSubmit = UIButton.init(frame: CGRect(x: 30, y: 400, width: self.view.frame.width - 80, height: 40))
         m_btnSubmit!.setTitle("Text:SetDone".localized(), for: .normal)
         m_btnSubmit!.backgroundColor = UIColor.rgb(0x849324)
-        m_btnSubmit!.layer.borderWidth = 1
-        m_btnSubmit!.layer.cornerRadius = 10
+        m_btnSubmit!.layer.cornerRadius = kCornerRadius
         self.view.addSubview(m_btnSubmit!)
     
     }
