@@ -18,33 +18,48 @@ class BGBoardCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.gray
-    }
-    
-    func labelStyle() {
-        m_lbNum = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        m_lbNum.textAlignment = .center
-        m_lbNum.textColor = UIColor.white
-        m_lbNum.layer.borderWidth = 1
-        m_lbNum.backgroundColor = UIColor.init(red: 255 / 255, green: 251 / 255, blue: 189 / 255, alpha: 1)
-        self.addSubview(m_lbNum)
-        self.m_txfNum.removeFromSuperview()
-        
-    }
-    
-    func texfieldStyle() {
-        m_txfNum = UITextField.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        m_txfNum.textAlignment = .center
-        m_txfNum.textColor = UIColor.white
-        m_txfNum.layer.borderWidth = 1
-        m_txfNum.layer.borderColor = UIColor.white.cgColor
-        m_txfNum.keyboardType = .numberPad
-        self.addSubview(m_txfNum)
-        m_txfNum.delegate = self
-        
+        labelInit()
+        textFieldInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func labelInit() {
+//        m_lbNum = UILabel.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        m_lbNum = UILabel.init()
+        m_lbNum.translatesAutoresizingMaskIntoConstraints = false
+        m_lbNum!.textAlignment = .center
+        m_lbNum!.textColor = UIColor.white
+        m_lbNum!.layer.borderWidth = 1
+        self.addSubview(m_lbNum!)
+        NSLayoutConstraint.activate(setConstraint(m_lbNum))
+        
+    }
+    
+    func textFieldInit() {
+//        m_txfNum = UITextField.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        m_txfNum = UITextField.init()
+        m_txfNum.translatesAutoresizingMaskIntoConstraints = false
+        m_txfNum!.textAlignment = .center
+        m_txfNum!.textColor = UIColor.white
+        m_txfNum!.layer.borderWidth = 1
+        m_txfNum!.layer.borderColor = UIColor.white.cgColor
+        m_txfNum!.keyboardType = .numberPad
+        m_txfNum!.delegate = self
+        self.addSubview(m_txfNum!)
+        NSLayoutConstraint.activate(setConstraint(m_txfNum))
+
+    }
+    
+    func setConstraint(_ view: UIView) -> [NSLayoutConstraint] {
+        let leading = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0)
+        let trailing = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0)
+        let top = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0)
+        let height = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: 0)
+        let aryCons: [NSLayoutConstraint] = [leading, trailing, top, height]
+        return aryCons
     }
 }
 

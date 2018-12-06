@@ -124,6 +124,9 @@ class BGGamePageViewController: UIViewController {
         case .Ready:
             m_BoardStatus = .Gaming
             m_cvBoard?.reloadData()
+        case .Gaming:
+            m_BoardStatus = .Default
+            m_cvBoard?.reloadData()
         default:
             return
         }
@@ -274,16 +277,17 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BGBoardCell
         switch self.m_BoardStatus {
         case .Ready:
-
-            cell.texfieldStyle()
-            cell.m_txfNum.text = "\(m_aryBoardNum[indexPath.item])"
+            cell.m_txfNum.isHidden = false
+            cell.m_lbNum.isHidden = true
+            cell.m_txfNum!.text = "\(m_aryBoardNum[indexPath.item])"
         case .Gaming:
-            cell.labelStyle()
-            cell.m_lbNum.text = "\(m_aryBoardNum[indexPath.item])"
+            cell.m_txfNum.isHidden = true
+            cell.m_lbNum.isHidden = false
+            cell.m_lbNum!.text = "\(m_aryBoardNum[indexPath.item])"
             if m_aryGameBoard[indexPath.item] == true {
-                cell.m_lbNum.backgroundColor = UIColor.darkGray
+                cell.m_lbNum?.backgroundColor = UIColor(red: 230 / 255, green: 170 / 255, blue: 104 / 255, alpha: 1)
             } else {
-                cell.m_lbNum.backgroundColor = UIColor.gray
+                cell.m_lbNum?.backgroundColor = UIColor(red: 163 / 255, green: 159 / 255, blue: 109 / 255, alpha: 1)
             }
         default:
             break
