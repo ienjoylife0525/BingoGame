@@ -18,6 +18,8 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     var m_txfMin: UITextField?
     var m_txfMax: UITextField?
     var m_btnSubmit: UIButton?
+    var m_lbMaxTitle: UILabel?
+    var m_lbMinTitle: UILabel?
     
     // Delegate
     weak var setDelegate: GameSettingDelegate!
@@ -45,6 +47,11 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
         maxTitleSet()
         maxTextFieldSet()
         submitBtnSet()
+        //Constraint
+        maxTitleConstraint()
+        maxTextFieldConstraint()
+        minTitleConstraint()
+        minTextFieldConstraint()
     }
     
     private func sizeTitleSet() {
@@ -81,35 +88,71 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func minTitleSet() {
-        let m_lbMinTitle = UILabel.init(frame: CGRect(x: 30, y: 300, width: 50, height: 40))
-        m_lbMinTitle.text = "Text:Min".localized()
-        m_lbMinTitle.textColor = UIColor.rgb(kCQueenBlue)
-        self.view.addSubview(m_lbMinTitle)
+        m_lbMinTitle = UILabel()
+        m_lbMinTitle!.text = "Text:Min".localized()
+        m_lbMinTitle!.textColor = UIColor.rgb(kCQueenBlue)
+        self.view.addSubview(m_lbMinTitle!)
+        m_lbMinTitle?.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func minTitleConstraint() {
+        let leading = NSLayoutConstraint(item: m_lbMinTitle!, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 30)
+        let trailing = NSLayoutConstraint(item: m_lbMinTitle!, attribute: .trailing, relatedBy: .equal, toItem: m_txfMin, attribute: .leading, multiplier: 1, constant: -10)
+        let top = NSLayoutConstraint(item: m_lbMinTitle!, attribute: .top, relatedBy: .equal, toItem: m_txfGoal, attribute: .bottom, multiplier: 1, constant: 20)
+        let height = NSLayoutConstraint(item: m_lbMinTitle!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
+        NSLayoutConstraint.activate([leading, top, trailing, height])
     }
     
     private func minTextFieldSet() {
-        m_txfMin = UITextField.init(frame: CGRect(x: 80, y: 300, width: 80, height: 40))
+        m_txfMin = UITextField()
         m_txfMin!.borderStyle = .roundedRect
         m_txfMin!.keyboardType = .numberPad
         m_txfMin!.returnKeyType = .done
         self.view.addSubview(m_txfMin!)
+        m_txfMin?.translatesAutoresizingMaskIntoConstraints = false
+        
+    }
+    
+    private func minTextFieldConstraint() {
+        let top = NSLayoutConstraint(item: m_txfMin!, attribute: .top, relatedBy: .equal, toItem: m_lbMinTitle, attribute: .top, multiplier: 1, constant: 0)
+        let height = NSLayoutConstraint(item: m_txfMin!, attribute: .height, relatedBy: .equal, toItem: m_lbMinTitle, attribute: .height, multiplier: 1, constant: 0)
+        let width = NSLayoutConstraint(item: m_txfMin!, attribute: .width, relatedBy: .equal, toItem: m_txfMax, attribute: .width, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activate([top, height, width])
         
     }
     
     private func maxTitleSet() {
-        let m_lbMaxTitle = UILabel.init(frame: CGRect(x: 190, y: 300, width: 50, height: 40))
-        m_lbMaxTitle.text = "Text:Max".localized()
-        m_lbMaxTitle.textColor = UIColor.rgb(kCQueenBlue)
-        self.view.addSubview(m_lbMaxTitle)
+        m_lbMaxTitle = UILabel()
+        m_lbMaxTitle!.text = "Text:Max".localized()
+        m_lbMaxTitle!.textColor = UIColor.rgb(kCQueenBlue)
+        self.view.addSubview(m_lbMaxTitle!)
+        m_lbMaxTitle?.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func maxTitleConstraint() {
+        let leading = NSLayoutConstraint(item: m_lbMaxTitle!, attribute: .leading, relatedBy: .equal, toItem: m_txfMin, attribute: .trailing, multiplier: 1, constant: 10)
+        let top = NSLayoutConstraint(item: m_lbMaxTitle!, attribute: .top, relatedBy: .equal, toItem: m_txfGoal!, attribute: .bottom, multiplier: 1, constant: 20)
+        let trailing = NSLayoutConstraint(item: m_lbMaxTitle!, attribute: .trailing, relatedBy: .equal, toItem: m_txfMax, attribute: .leading, multiplier: 1, constant: -10)
+        let height = NSLayoutConstraint(item: m_lbMaxTitle!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
+        NSLayoutConstraint.activate([leading, top, trailing, height])
+        
     }
     
     private func maxTextFieldSet() {
-        m_txfMax = UITextField.init(frame: CGRect(x: 240, y: 300, width: 80, height: 40))
+        m_txfMax = UITextField()
         m_txfMax!.borderStyle = .roundedRect
         m_txfMax!.keyboardType = .numberPad
         m_txfMax!.returnKeyType = .done
         self.view.addSubview(m_txfMax!)
+        m_txfMax?.translatesAutoresizingMaskIntoConstraints = false
         
+    }
+    
+    private func maxTextFieldConstraint() {
+        let trailing = NSLayoutConstraint(item: m_txfMax!, attribute: .trailing, relatedBy: .equal, toItem: m_txfGoal, attribute: .trailing, multiplier: 1, constant: 0)
+        let height = NSLayoutConstraint(item: m_txfMax!, attribute: .height, relatedBy: .equal, toItem: m_lbMaxTitle, attribute: .height, multiplier: 1, constant: 0)
+        let top = NSLayoutConstraint(item: m_txfMax!, attribute: .top, relatedBy: .equal, toItem: m_lbMaxTitle, attribute: .top, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activate([trailing, height, top])
     }
     
     private func submitBtnSet() {
@@ -120,6 +163,8 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(m_btnSubmit!)
     
     }
+    
+    
     
     
     // Function
