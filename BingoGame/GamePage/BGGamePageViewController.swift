@@ -335,7 +335,7 @@ extension BGGamePageViewController: CellInputDataDelegate{
     func setCellNum(_ setCell: UICollectionViewCell, data: String) {
         let index = m_cvBoard?.indexPath(for: setCell)?.item
         if data == "" {
-            self.validAlert(msg: "Please Enter Number")
+            self.validAlert(msg: "Alert:CellNumEmpty".localized())
             self.m_cvBoard?.reloadData()
             return
         } else{
