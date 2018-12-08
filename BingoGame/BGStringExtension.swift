@@ -17,4 +17,5 @@ extension String {
         let result = String(format: str, input)
         return result
     }
+    // 可能會設置多個參數 refactor 方法
 }

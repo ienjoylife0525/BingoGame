@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
-
+//列舉指定類別
 enum BoardStatus {
+    // 列舉小寫
     case Default
     case Ready
     case Gaming
@@ -25,24 +26,25 @@ class BGGamePageViewController: UIViewController {
     
     
     // variable
-    var m_iBoardSize:Int = 0
+    var m_iBoardSize: Int = 0
     var m_iGoal:Int = 0
     var m_iMinNum:Int = 0
     var m_iMaxNum:Int = 0
     var m_aryGameBoard = [Bool]()
     var m_iChessNum:Int = 0
+    // 沒用過
     var m_bBoardInput: Bool = false
     var m_BoardStatus: BoardStatus = .Default
     var m_aryBoardNum = [Int]()
+    //沒用過
     var m_iInputIndex = 0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewSet()
         bindUI()
-        
-
     }
     
     private func bindUI() {
@@ -98,6 +100,7 @@ class BGGamePageViewController: UIViewController {
     private func boardViewSet() {
         let layout = UICollectionViewFlowLayout()
         m_cvBoard = UICollectionView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10), collectionViewLayout: layout)
+        //cell Identifier constant
         m_cvBoard?.register(BGBoardCell.self, forCellWithReuseIdentifier: "Cell")
         m_cvBoard!.backgroundColor = UIColor.rgb(kCBlackOlive)
         m_cvBoard?.isScrollEnabled = false
@@ -149,6 +152,7 @@ class BGGamePageViewController: UIViewController {
     private func randonBoard() {
         m_aryBoardNum = [Int](repeating: -1, count: m_iChessNum)
         for i in 0..<m_iChessNum {
+            //for 不要用var 參數
             var bValidNum = true
             repeat{
                 m_aryBoardNum[i] = Int.random(in: m_iMinNum...m_iMaxNum)
@@ -360,5 +364,8 @@ protocol GameSettingDelegate: class {
     func setRange(_ setPage: BGSettingViewController, min: Int?, max: Int?)
     
 }
+
+// Alert 試著用閉包
+//Model
 
 
