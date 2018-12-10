@@ -9,23 +9,38 @@
 import UIKit
 
 extension UIAlertController {
-    func showAlert(message: String, in viewController: UIViewController) {
+    func showAlert(message: String) {
         let alert = UIAlertController(title: "Alert:Title".localized(), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Alert:Action".localized(), style: .cancel))
-        viewController.present(alert, animated: true)
+        currentVC().present(alert, animated: true)
     }
     
-    func showConfirmAlert(message: String,
-                          in viewController: UIViewController,
-                          confirm:@escaping (() -> Void)) {
+    func showConfirmAlert(message: String, confirm:@escaping (() -> Void)) {
         let alert = UIAlertController(title: "Alert:Title".localized(), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Alert:Action".localized(), style: .cancel))
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
             confirm()
         }))
-        viewController.present(alert, animated: true)
-        
-        
+        currentVC().present(alert, animated: true)
         
     }
+    
+    func currentVC() -> UIViewController {
+        var top = UIApplication.shared.keyWindow?.rootViewController
+        while true {
+            if let presented = top?.presentedViewController {
+                top = presented
+            } else if let nav = top as? UINavigationController {
+                top = nav.visibleViewController
+            } else if let tab = top as? UITabBarController {
+                top = tab.selectedViewController
+            } else {
+                break
+            }
+        }
+        return top!
+    }
+    
+    
+    
 }

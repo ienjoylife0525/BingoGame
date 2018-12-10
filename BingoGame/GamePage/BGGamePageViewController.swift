@@ -135,7 +135,7 @@ class BGGamePageViewController: UIViewController {
             startBtnChange()
         case .Gaming:
             //Become Default
-            UIAlertController().showConfirmAlert(message: "重設", in: self, confirm: {() -> Void in
+            UIAlertController().showConfirmAlert(message: "重設", confirm: {() -> Void in
                 self.m_BoardStatus = .Default
                 self.m_cvBoard?.reloadData()
                 self.startBtnChange()
