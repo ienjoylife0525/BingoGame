@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BGBoardCell: UICollectionViewCell {
+class BGBoardCollectionViewCell: UICollectionViewCell {
         
     var m_lbNum: UILabel!
     var m_txfNum: UITextField!
@@ -63,7 +63,7 @@ class BGBoardCell: UICollectionViewCell {
     }
 }
 
-extension BGBoardCell: UITextFieldDelegate {
+extension BGBoardCollectionViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let data = textField.text else {
             return 

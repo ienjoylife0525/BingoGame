@@ -108,7 +108,7 @@ class BGGamePageViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         m_cvBoard = UICollectionView(frame: CGRect(x: 5, y: 180, width: self.view.frame.width - 10, height: self.view.frame.width - 10), collectionViewLayout: layout)
         //cell Identifier constant
-        m_cvBoard?.register(BGBoardCell.self, forCellWithReuseIdentifier: "Cell")
+        m_cvBoard?.register(BGBoardCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         m_cvBoard!.backgroundColor = UIColor.rgb(kCBlackOlive)
         m_cvBoard?.isScrollEnabled = false
         self.m_cvBoard?.delegate = self
@@ -210,7 +210,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BGBoardCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BGBoardCollectionViewCell
         switch self.m_BoardStatus {
         case .Ready:
             cell.m_txfNum.isHidden = false

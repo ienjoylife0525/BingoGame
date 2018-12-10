@@ -21,7 +21,7 @@
 		6EE16BD721B5992A009336FA /* BingoGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BD621B5992A009336FA /* BingoGameUITests.swift */; };
 		6EE16BE721B599B2009336FA /* BGGamePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BE621B599B2009336FA /* BGGamePageViewController.swift */; };
 		6EE16BEA21B599D7009336FA /* BGSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BE921B599D7009336FA /* BGSettingViewController.swift */; };
-		6EE16BEC21B635FF009336FA /* BGBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BEB21B635FF009336FA /* BGBoardCell.swift */; };
+		6EE16BEC21B635FF009336FA /* BGBoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BEB21B635FF009336FA /* BGBoardCollectionViewCell.swift */; };
 		FEEEDE13DC62AF5FCC62F438 /* Pods_BingoGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77588CCCC6A43464E2EB5FF9 /* Pods_BingoGame.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +68,7 @@
 		6EE16BD821B5992A009336FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EE16BE621B599B2009336FA /* BGGamePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGGamePageViewController.swift; sourceTree = "<group>"; };
 		6EE16BE921B599D7009336FA /* BGSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGSettingViewController.swift; sourceTree = "<group>"; };
-		6EE16BEB21B635FF009336FA /* BGBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGBoardCell.swift; sourceTree = "<group>"; };
+		6EE16BEB21B635FF009336FA /* BGBoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGBoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		77588CCCC6A43464E2EB5FF9 /* Pods_BingoGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BingoGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -124,6 +124,14 @@
 			name = Extension;
 			sourceTree = "<group>";
 		};
+		6EDB81BA21BE44440057BDDF /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				6EE16BEB21B635FF009336FA /* BGBoardCollectionViewCell.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		6EE16BAA21B59927009336FA = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +157,7 @@
 		6EE16BB521B59927009336FA /* BingoGame */ = {
 			isa = PBXGroup;
 			children = (
+				6EDB81BA21BE44440057BDDF /* Component */,
 				6EDB81AF21B90D730057BDDF /* Extension */,
 				6EE16BE421B5993B009336FA /* ViewController */,
 				6EE16BB621B59927009336FA /* AppDelegate.swift */,
@@ -194,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				6EE16BE621B599B2009336FA /* BGGamePageViewController.swift */,
-				6EE16BEB21B635FF009336FA /* BGBoardCell.swift */,
 				6EDB81B621BC560F0057BDDF /* BGGamePageModel.swift */,
 			);
 			path = GamePage;
@@ -385,7 +393,7 @@
 				6EE16BB921B59927009336FA /* ViewController.swift in Sources */,
 				6EDB81B721BC560F0057BDDF /* BGGamePageModel.swift in Sources */,
 				6EDB81B321B921700057BDDF /* BGDefine.swift in Sources */,
-				6EE16BEC21B635FF009336FA /* BGBoardCell.swift in Sources */,
+				6EE16BEC21B635FF009336FA /* BGBoardCollectionViewCell.swift in Sources */,
 				6EDB81B521B925B30057BDDF /* BGUIColorExtension.swift in Sources */,
 				6EE16BE721B599B2009336FA /* BGGamePageViewController.swift in Sources */,
 				6EE16BEA21B599D7009336FA /* BGSettingViewController.swift in Sources */,
