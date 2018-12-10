@@ -135,11 +135,14 @@ class BGGamePageViewController: UIViewController {
             startBtnChange()
         case .Gaming:
             //Become Default
-            m_BoardStatus = .Default
-            m_cvBoard?.reloadData()
-            startBtnChange()
-            m_btnSetting?.isEnabled = true
-            m_lbStatus?.text = "Text:SetFirst".localized()
+            UIAlertController().showConfirmAlert(message: "重設", in: self, confirm: {() -> Void in
+                self.m_BoardStatus = .Default
+                self.m_cvBoard?.reloadData()
+                self.startBtnChange()
+                self.m_btnSetting?.isEnabled = true
+                self.m_lbStatus?.text = "Text:SetFirst".localized()
+            })
+            
         default:
             return
         }
