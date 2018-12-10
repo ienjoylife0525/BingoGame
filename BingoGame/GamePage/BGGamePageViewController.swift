@@ -159,14 +159,6 @@ class BGGamePageViewController: UIViewController {
         
     }
     
-    
-    private func validAlert(msg: String){
-        let alertController = UIAlertController(title: "Alert:Title".localized(), message: msg, preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "Alert:Action".localized(), style: .default, handler: nil)
-        alertController.addAction(confirm)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
 }
 
 extension BGGamePageViewController: GameSettingDelegate{
@@ -272,13 +264,13 @@ extension BGGamePageViewController: CellInputDataDelegate{
     func setCellNum(_ setCell: UICollectionViewCell, data: String) {
         let index = m_cvBoard?.indexPath(for: setCell)?.item
         if data == "" {
-            self.validAlert(msg: "Alert:CellNumEmpty".localized())
+            UIAlertController().showAlert(message: "Alert:CellNumEmpty".localized())
             self.m_cvBoard?.reloadData()
             return
         } else{
             for i in 0..<self.m_iChessNum {
                 if Int(data)! == m_model.m_aryRandom[i] && i != index{
-                    self.validAlert(msg: "Alert:NumRepeat".localized())
+                    UIAlertController().showAlert(message: "Alert:NumRepeat".localized())
                     self.m_cvBoard?.reloadData()
                     return
                 }

@@ -168,13 +168,6 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     
     // Function
-    private func validAlert(msg: String){
-        let alertController = UIAlertController(title: "Alert:Title".localized(), message: msg, preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "Alert:Action".localized(), style: .default, handler: nil)
-        alertController.addAction(confirm)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     @objc private func clickSubmit() {
         if inputValid() == false {
             return
@@ -191,7 +184,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
             return false
         }
         if size == "" {
-            validAlert(msg: "Alert:NoSize".localized())
+            UIAlertController().showAlert(message: "Alert:NoSize".localized())
             return false
         }
         //Goal Check
@@ -199,10 +192,10 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
             return false
         }
         if goal == "" {
-            validAlert(msg: "Alert:NoGoal".localized())
+            UIAlertController().showAlert(message: "Alert:NoGoal".localized())
             return false
         } else if Int(goal)! > Int(size)! * 2 + 2 {
-            validAlert(msg: "Alert:WrongGoal".localized(Int(size)! * 2 + 2))
+            UIAlertController().showAlert(message: "Alert:WrongGoal".localized(Int(size)! * 2 + 2))
             return false
         }
         //Min & Max Check
@@ -210,23 +203,22 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
             return false
         }
         if min == "" {
-            validAlert(msg: "Alert:NoMin".localized())
+            UIAlertController().showAlert(message: "Alert.NoMin".localized())
             return false
         }
         guard let max = m_txfMax?.text else {
             return false
         }
         if max == "" {
-            validAlert(msg: "Alert:NoMax".localized())
+            UIAlertController().showAlert(message: "Alert.NoMax".localized())
             return false
         }else if Int(max)! < Int(min)! {
-            validAlert(msg: "Alert:WrongMax".localized())
+            UIAlertController().showAlert(message: "Alert.WrongMax".localized())
             return false
         }else if Int(max)! - Int(min)! + 1 < Int(size)! * Int(size)! {
-            validAlert(msg: "Alert:WrongRange".localized())
+            UIAlertController().showAlert(message: "Alert:WrongRange".localized())
             return false
         }
-        
         
         return true
     }
