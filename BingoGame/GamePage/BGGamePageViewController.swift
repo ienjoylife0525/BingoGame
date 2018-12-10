@@ -123,6 +123,7 @@ class BGGamePageViewController: UIViewController {
     @objc private func clickSetting() {
         let m_vcSetPage = BGSettingViewController()
         m_vcSetPage.setDelegate = self
+        
         self.navigationController?.pushViewController(m_vcSetPage, animated: true)
     }
     @objc private func clickGame() {
@@ -135,7 +136,7 @@ class BGGamePageViewController: UIViewController {
             startBtnChange()
         case .Gaming:
             //Become Default
-            UIAlertController().showConfirmAlert(message: "Alert:OverGame", confirm: {() -> Void in
+            UIAlertController().showConfirmAlert(message: "Alert:OverGame".localized(), confirm: {() -> Void in
                 self.m_BoardStatus = .Default
                 self.m_cvBoard?.reloadData()
                 self.startBtnChange()
