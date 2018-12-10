@@ -12,10 +12,18 @@ extension String {
     func localized() -> String {
         return NSLocalizedString(self, comment: "")
     }
-    func localized(_ input: Int) -> String{
+    
+    func localized(_ input: Int) -> String {
         let str = NSLocalizedString(self, comment: "")
         let result = String(format: str, input)
         return result
     }
-    // 可能會設置多個參數 refactor 方法
+    
+    func localized(_ inputs: Int...) -> String {
+        let str = NSLocalizedString(self, comment: "")
+        let result = String(format: str, arguments: inputs)
+        return result
+    }
+    
+    
 }

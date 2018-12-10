@@ -22,6 +22,7 @@
 "Text:Min" = "最小值";
 "Text:Max" = "最大值";
 "Text:SetDone" = "設定完成";
+"Text:Status" = "Bingo:%d條 / 目標:%d條";
 
 // Alert
 "Alert:Title" = "警告";

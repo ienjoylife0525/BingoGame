@@ -22,6 +22,7 @@
 "Text:Min" = "Min";
 "Text:Max" = "Max";
 "Text:SetDone" = "Settin Done";
+"Text:Status" =  "Bingo: %d lines / Goal: %d lines";
 
 // Alert
 "Alert:Title" = "Alert";

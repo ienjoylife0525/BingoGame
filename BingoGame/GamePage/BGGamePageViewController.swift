@@ -181,7 +181,7 @@ extension BGGamePageViewController: GameSettingDelegate{
             return
         }
         self.m_iGoal = iInputGoal
-        self.m_lbStatus?.text = "Text:BingoLine".localized(0) + "/" +  "Text:GoalLine".localized(iInputGoal)
+        self.m_lbStatus?.text = "Text:Status".localized(0, m_iGoal)
     }
     
     func setRange(_ setPage: BGSettingViewController, min: Int?, max: Int?) {
@@ -255,7 +255,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
             if m_model.checkBingo(size: m_iBoardSize) >= m_iGoal {
                 m_lbStatus?.text = "Text:Win".localized()
             }else {
-                m_lbStatus?.text = "Text:BingoLine".localized(m_model.checkBingo(size: m_iBoardSize)) + "/" +  "Text:GoalLine".localized(m_iGoal)
+                m_lbStatus?.text = "Text:Status".localized(m_model.checkBingo(size: m_iBoardSize), m_iGoal)
 
             }
         default:
