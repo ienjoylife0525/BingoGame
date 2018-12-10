@@ -30,4 +30,66 @@ class GamePageModel {
             }while bValidNum == false
         }
     }
+    
+    func checkBingo(size: Int) -> Int {
+        var iLine: Int = 0
+        //check raw
+        for i in stride(from: 0, to: m_aryBoard.count, by: size) {
+            var goalNum = 0
+            for j in 0..<size {
+                if m_aryBoard[i + j] == true {
+                    goalNum = goalNum + 1
+                }else {
+                    break
+                }
+            }
+            if goalNum == size {
+                iLine = iLine + 1
+            }
+        }
+        
+        //check column
+        for i in 0..<size {
+            var goalNum = 0
+            for j in stride(from: 0, to: m_aryBoard.count, by: size){
+                if m_aryBoard[i + j] == true {
+                    goalNum = goalNum + 1
+                }else {
+                    break
+                }
+            }
+            if goalNum == size {
+                iLine = iLine + 1
+            }
+        }
+        
+        //check diagonal
+        var iGoalNum: Int = 0
+        for i in stride(from: 0, to: m_aryBoard.count, by: size + 1){
+            if m_aryBoard[i] == true {
+                iGoalNum = iGoalNum + 1
+            }else {
+                break
+            }
+        }
+        if iGoalNum == size {
+            iLine = iLine + 1
+        }
+        
+        //check another diagonal
+        iGoalNum = 0
+        for i in stride(from: size - 1, to: m_aryBoard.count - size + 1, by: size - 1){
+            if m_aryBoard[i] == true{
+                iGoalNum = iGoalNum + 1
+            }else {
+                break
+            }
+        }
+        if iGoalNum == size {
+            iLine = iLine + 1
+        }
+        
+        return iLine
+    
+    }
 }

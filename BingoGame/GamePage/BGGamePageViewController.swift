@@ -30,7 +30,6 @@ class BGGamePageViewController: UIViewController {
     var m_iGoal:Int = 0
     var m_iMinNum:Int = 0
     var m_iMaxNum:Int = 0
-    var m_aryGameBoard = [Bool]()
     var m_iChessNum:Int = 0
     var m_BoardStatus: BoardStatus = .Default
     
@@ -136,8 +135,8 @@ class BGGamePageViewController: UIViewController {
     }
     
     private func createBoard() {
-        self.m_aryGameBoard.removeAll()
-        self.m_aryGameBoard = [Bool](repeating: false, count: m_iChessNum)
+        self.m_model.m_aryBoard.removeAll()
+        self.m_model.m_aryBoard = [Bool](repeating: false, count: m_iChessNum)
         m_model.randomBoard(m_iChessNum, min: m_iMinNum, max: m_iMaxNum)
         //Draw board
         self.m_BoardStatus = .Ready
@@ -146,66 +145,6 @@ class BGGamePageViewController: UIViewController {
         
     }
     
-    private func checkBingoLine() -> Int {
-        var iLine: Int = 0
-        //check raw
-        for i in stride(from: 0, to: m_iChessNum, by: m_iBoardSize) {
-            var goalNum = 0
-            for j in 0..<m_iBoardSize {
-                if m_aryGameBoard[i + j] == true {
-                    goalNum = goalNum + 1
-                }else {
-                    break
-                }
-            }
-            if goalNum == m_iBoardSize {
-                iLine = iLine + 1
-            }
-        }
-        
-        //check column
-        for i in 0..<m_iBoardSize {
-            var goalNum = 0
-            for j in stride(from: 0, to: m_iChessNum, by: m_iBoardSize){
-                if m_aryGameBoard[i + j] == true {
-                    goalNum = goalNum + 1
-                }else {
-                    break
-                }
-            }
-            if goalNum == m_iBoardSize {
-                iLine = iLine + 1
-            }
-        }
-        
-        //check diagonal
-        var iGoalNum: Int = 0
-        for i in stride(from: 0, to: m_iChessNum, by: m_iBoardSize + 1){
-            if m_aryGameBoard[i] == true {
-                iGoalNum = iGoalNum + 1
-            }else {
-                break
-            }
-        }
-        if iGoalNum == m_iBoardSize {
-            iLine = iLine + 1
-        }
-        
-        //check another diagonal
-        iGoalNum = 0
-        for i in stride(from: m_iBoardSize - 1, to: m_iChessNum - m_iBoardSize + 1, by: m_iBoardSize - 1){
-            if m_aryGameBoard[i] == true{
-                iGoalNum = iGoalNum + 1
-            }else {
-                break
-            }
-        }
-        if iGoalNum == m_iBoardSize {
-            iLine = iLine + 1
-        }
-        
-        return iLine
-    }
     
     private func validAlert(msg: String){
         let alertController = UIAlertController(title: "Alert:Title".localized(), message: msg, preferredStyle: .alert)
@@ -270,7 +209,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
             cell.m_txfNum.isHidden = true
             cell.m_lbNum.isHidden = false
             cell.m_lbNum!.text = "\(m_model.m_aryRandom[indexPath.item])"
-            if m_aryGameBoard[indexPath.item] == true {
+            if m_model.m_aryBoard[indexPath.item] == true {
                 cell.m_lbNum?.backgroundColor = UIColor.rgb(kCCoolBlack)
             } else {
                 cell.m_lbNum?.backgroundColor = UIColor.rgb(kCBlackOlive)
@@ -300,12 +239,12 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch m_BoardStatus {
         case .Gaming:
-            m_aryGameBoard[indexPath.item] = !m_aryGameBoard[indexPath.item]
+            m_model.m_aryBoard[indexPath.item] = !m_model.m_aryBoard[indexPath.item]
             self.m_cvBoard?.reloadData()
-            if checkBingoLine() >= m_iGoal {
+            if m_model.checkBingo(size: m_iBoardSize) >= m_iGoal {
                 m_lbStatus?.text = "Text:Win".localized()
             }else {
-                m_lbStatus?.text = "Text:BingoLine".localized(checkBingoLine()) + "/" +  "Text:GoalLine".localized(m_iGoal)
+                m_lbStatus?.text = "Text:BingoLine".localized(m_model.checkBingo(size: m_iBoardSize)) + "/" +  "Text:GoalLine".localized(m_iGoal)
 
             }
         default:
