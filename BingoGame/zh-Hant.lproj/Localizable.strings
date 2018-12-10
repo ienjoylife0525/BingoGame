@@ -27,6 +27,7 @@
 // Alert
 "Alert:Title" = "警告";
 "Alert:Action" = "確定";
+"Alert:Cancel" = "取消";
 "Alert:Error" = "錯誤";
 "Alert:NumRepeat" = "數字重複";
 "Alert:NoSize" = "請輸入尺寸";
@@ -37,4 +38,5 @@
 "Alert:WrongRange" = "隨機範圍應大於棋格總數";
 "Alert:WrongMax" = "最大值應大於最小值";
 "Alert:CellNumEmpty" = "請輸入數字";
+"Alert:OverGame" = "確定結束遊戲？";
 

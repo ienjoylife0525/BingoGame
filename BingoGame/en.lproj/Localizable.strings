@@ -27,6 +27,7 @@
 // Alert
 "Alert:Title" = "Alert";
 "Alert:Action" = "Ok";
+"Alert:Cancel" = "Cancel";
 "Alert:Error" = "Error";
 "Alert:NumRepeat" = "Number Repeat";
 "Alert:NoSize" = "Please input size";
@@ -37,3 +38,4 @@
 "Alert:WrongRange" = "Random range should biger than chess";
 "Alert:WrongMax" = "Maximum should biger than minimum";
 "Alert:CellNumEmpty" = "Please input number";
+"Alert:OverGame" = "Over the Game?";

@@ -17,8 +17,8 @@ extension UIAlertController {
     
     func showConfirmAlert(message: String, confirm:@escaping (() -> Void)) {
         let alert = UIAlertController(title: "Alert:Title".localized(), message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Alert:Action".localized(), style: .cancel))
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Alert:Cancel".localized(), style: .cancel))
+        alert.addAction(UIAlertAction(title: "Alert:Action".localized(), style: .default, handler: { (_) in
             confirm()
         }))
         currentVC().present(alert, animated: true)
