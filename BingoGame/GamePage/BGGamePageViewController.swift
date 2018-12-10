@@ -32,13 +32,10 @@ class BGGamePageViewController: UIViewController {
     var m_iMaxNum:Int = 0
     var m_aryGameBoard = [Bool]()
     var m_iChessNum:Int = 0
-    // 沒用過
-    var m_bBoardInput: Bool = false
     var m_BoardStatus: BoardStatus = .Default
-    var m_aryBoardNum = [Int]()
-    //沒用過
-    var m_iInputIndex = 0
     
+    // Model
+    var m_model = GamePageModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,29 +138,12 @@ class BGGamePageViewController: UIViewController {
     private func createBoard() {
         self.m_aryGameBoard.removeAll()
         self.m_aryGameBoard = [Bool](repeating: false, count: m_iChessNum)
-        randonBoard()
+        m_model.randomBoard(m_iChessNum, min: m_iMinNum, max: m_iMaxNum)
         //Draw board
         self.m_BoardStatus = .Ready
         self.m_cvBoard?.reloadData()
         self.startBtnChange()
         
-    }
-    
-    private func randonBoard() {
-        m_aryBoardNum = [Int](repeating: -1, count: m_iChessNum)
-        for i in 0..<m_iChessNum {
-            //for 不要用var 參數
-            var bValidNum = true
-            repeat{
-                m_aryBoardNum[i] = Int.random(in: m_iMinNum...m_iMaxNum)
-                bValidNum = true
-                for j in 0..<i {
-                    if m_aryBoardNum[i] == m_aryBoardNum[j]{
-                        bValidNum = false
-                    }
-                }
-            }while bValidNum == false
-        }
     }
     
     private func checkBingoLine() -> Int {
@@ -285,11 +265,11 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
         case .Ready:
             cell.m_txfNum.isHidden = false
             cell.m_lbNum.isHidden = true
-            cell.m_txfNum!.text = "\(m_aryBoardNum[indexPath.item])"
+            cell.m_txfNum!.text = "\(m_model.m_aryRandom[indexPath.item])"
         case .Gaming:
             cell.m_txfNum.isHidden = true
             cell.m_lbNum.isHidden = false
-            cell.m_lbNum!.text = "\(m_aryBoardNum[indexPath.item])"
+            cell.m_lbNum!.text = "\(m_model.m_aryRandom[indexPath.item])"
             if m_aryGameBoard[indexPath.item] == true {
                 cell.m_lbNum?.backgroundColor = UIColor.rgb(kCCoolBlack)
             } else {
@@ -339,13 +319,13 @@ extension BGGamePageViewController: CellInputDataDelegate{
     func setCellNum(_ setCell: UICollectionViewCell, data: String) {
         let index = m_cvBoard?.indexPath(for: setCell)?.item
         for i in 0..<self.m_iChessNum {
-            if Int(data)! == m_aryBoardNum[i] && i != index{
+            if Int(data)! == m_model.m_aryRandom[i] && i != index{
                 self.validAlert(msg: "Alert:NumRepeat".localized())
                 self.m_cvBoard?.reloadData()
                 return
             }
         }
-        m_aryBoardNum[index!] = Int(data)!
+        m_model.m_aryRandom[index!] = Int(data)!
         self.m_cvBoard?.reloadData()
         
     }

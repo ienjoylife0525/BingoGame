@@ -12,6 +12,7 @@
 		6EDB81B121B90DC80057BDDF /* BGStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDB81B021B90DC80057BDDF /* BGStringExtension.swift */; };
 		6EDB81B321B921700057BDDF /* BGDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDB81B221B921700057BDDF /* BGDefine.swift */; };
 		6EDB81B521B925B30057BDDF /* BGUIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDB81B421B925B30057BDDF /* BGUIColorExtension.swift */; };
+		6EDB81B721BC560F0057BDDF /* BGGamePageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDB81B621BC560F0057BDDF /* BGGamePageModel.swift */; };
 		6EE16BB721B59927009336FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BB621B59927009336FA /* AppDelegate.swift */; };
 		6EE16BB921B59927009336FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE16BB821B59927009336FA /* ViewController.swift */; };
 		6EE16BBC21B59927009336FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EE16BBA21B59927009336FA /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		6EDB81B021B90DC80057BDDF /* BGStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGStringExtension.swift; sourceTree = "<group>"; };
 		6EDB81B221B921700057BDDF /* BGDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGDefine.swift; sourceTree = "<group>"; };
 		6EDB81B421B925B30057BDDF /* BGUIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGUIColorExtension.swift; sourceTree = "<group>"; };
+		6EDB81B621BC560F0057BDDF /* BGGamePageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGGamePageModel.swift; sourceTree = "<group>"; };
 		6EE16BB321B59927009336FA /* BingoGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BingoGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE16BB621B59927009336FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EE16BB821B59927009336FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		6EE16BB521B59927009336FA /* BingoGame */ = {
 			isa = PBXGroup;
 			children = (
+				6EDB81AF21B90D730057BDDF /* Extension */,
 				6EE16BE421B5993B009336FA /* ViewController */,
 				6EE16BB621B59927009336FA /* AppDelegate.swift */,
 				6EDB81B221B921700057BDDF /* BGDefine.swift */,
@@ -181,7 +184,6 @@
 		6EE16BE421B5993B009336FA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6EDB81AF21B90D730057BDDF /* Extension */,
 				6EE16BE821B599BC009336FA /* Setting */,
 				6EE16BE521B59977009336FA /* GamePage */,
 			);
@@ -193,6 +195,7 @@
 			children = (
 				6EE16BE621B599B2009336FA /* BGGamePageViewController.swift */,
 				6EE16BEB21B635FF009336FA /* BGBoardCell.swift */,
+				6EDB81B621BC560F0057BDDF /* BGGamePageModel.swift */,
 			);
 			path = GamePage;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EE16BB921B59927009336FA /* ViewController.swift in Sources */,
+				6EDB81B721BC560F0057BDDF /* BGGamePageModel.swift in Sources */,
 				6EDB81B321B921700057BDDF /* BGDefine.swift in Sources */,
 				6EE16BEC21B635FF009336FA /* BGBoardCell.swift in Sources */,
 				6EDB81B521B925B30057BDDF /* BGUIColorExtension.swift in Sources */,
