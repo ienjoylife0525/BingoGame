@@ -285,6 +285,5 @@ protocol GameSettingDelegate: class {
 }
 
 // Alert 試著用閉包
-//Model
 
 
