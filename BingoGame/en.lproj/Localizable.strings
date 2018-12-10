@@ -35,3 +35,4 @@
 "Alert:WrongGoal" = "Goal maximum is %d";
 "Alert:WrongRange" = "Random range should biger than chess";
 "Alert:WrongMax" = "Maximum should biger than minimum";
+"Alert:CellNumEmpty" = "Please input number";

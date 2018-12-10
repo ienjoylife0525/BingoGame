@@ -268,11 +268,17 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
 extension BGGamePageViewController: CellInputDataDelegate{
     func setCellNum(_ setCell: UICollectionViewCell, data: String) {
         let index = m_cvBoard?.indexPath(for: setCell)?.item
-        for i in 0..<self.m_iChessNum {
-            if Int(data)! == m_model.m_aryRandom[i] && i != index{
-                self.validAlert(msg: "Alert:NumRepeat".localized())
-                self.m_cvBoard?.reloadData()
-                return
+        if data == "" {
+            self.validAlert(msg: "Alert:CellNumEmpty".localized())
+            self.m_cvBoard?.reloadData()
+            return
+        } else{
+            for i in 0..<self.m_iChessNum {
+                if Int(data)! == m_model.m_aryRandom[i] && i != index{
+                    self.validAlert(msg: "Alert:NumRepeat".localized())
+                    self.m_cvBoard?.reloadData()
+                    return
+                }
             }
         }
         m_model.m_aryRandom[index!] = Int(data)!
