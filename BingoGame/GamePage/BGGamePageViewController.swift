@@ -57,6 +57,7 @@ class BGGamePageViewController: UIViewController {
         statusLabelSet()
         startBtnSet()
         boardViewSet()
+        startBtnConstraint()
     }
     
     private func settingBtnSet() {
@@ -72,9 +73,19 @@ class BGGamePageViewController: UIViewController {
     }
     
     private func startBtnSet() {
-        m_btnGameStart = UIButton(frame: CGRect(x: 90, y: 580, width: 200, height: 40))
+        m_btnGameStart = UIButton()
+//        m_btnGameStart = UIButton(frame: CGRect(x: 90, y: 580, width: 200, height: 40))
         m_btnGameStart!.layer.cornerRadius = kCornerRadius
         self.view.addSubview(m_btnGameStart!)
+        m_btnGameStart?.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func startBtnConstraint() {
+        let leading = NSLayoutConstraint(item: m_btnGameStart!, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 30)
+        let top = NSLayoutConstraint(item: m_btnGameStart!, attribute: .top, relatedBy: .equal, toItem: m_cvBoard, attribute: .bottom, multiplier: 1, constant: 30)
+        let trailing = NSLayoutConstraint(item: m_btnGameStart!, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: -30)
+        let height = NSLayoutConstraint(item: m_btnGameStart!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+        NSLayoutConstraint.activate([leading, top, trailing, height])
     }
     
     private func startBtnChange() {
