@@ -16,6 +16,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     var m_iDefaultSize: Int = 0
     var m_iDefaultMin: Int = 0
     var m_iDefaultMax: Int = 0
+    let m_iValidSize: Int = 2
     
     
     // UI
@@ -203,7 +204,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
         if size == "" {
             UIAlertController().showAlert(message: "Alert:NoSize".localized())
             return false
-        } else if Int(size)! <= 1 {
+        } else if Int(size)! < 2 {
             UIAlertController().showAlert(message: "Alert:unValidSize".localized())
         }
         //Goal Check
