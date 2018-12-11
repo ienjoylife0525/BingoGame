@@ -11,6 +11,12 @@ import UIKit
 
 class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
+    //variable
+    var m_iDefaultGoal: Int = 0
+    var m_iDefaultSize: Int = 0
+    var m_iDefaultMin: Int = 0
+    var m_iDefaultMax: Int = 0
+    
     
     // UI
     var m_txfSize: UITextField?
@@ -63,7 +69,11 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func sizeTextFieldSet() {
         m_txfSize = UITextField.init(frame: CGRect(x: 30, y: 140, width: self.view.frame.width - 80, height: 40))
-        m_txfSize!.placeholder = "Text:SizeHolder".localized()
+        if m_iDefaultSize == 0 {
+            m_txfSize!.placeholder = "Text:SizeHolder".localized()
+        } else {
+            m_txfSize?.text = String(m_iDefaultSize)
+        }
         m_txfSize!.borderStyle = .roundedRect
         m_txfSize!.keyboardType = .numberPad
         m_txfSize!.returnKeyType = .done
@@ -79,7 +89,12 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func goalTextFieldSet() {
         m_txfGoal = UITextField.init(frame: CGRect(x: 30, y: 245, width: self.view.frame.width - 80 , height: 40))
-        m_txfGoal!.placeholder = "Text:GoalHolder".localized()
+        if m_iDefaultGoal == 0 {
+            m_txfGoal!.placeholder = "Text:GoalHolder".localized()
+        } else {
+            m_txfGoal!.text = String(m_iDefaultGoal)
+        }
+       
         m_txfGoal!.borderStyle = .roundedRect
         m_txfGoal!.keyboardType = .numberPad
         m_txfGoal!.returnKeyType = .done
@@ -105,6 +120,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func minTextFieldSet() {
         m_txfMin = UITextField()
+        m_txfMin?.text = String(m_iDefaultMin)
         m_txfMin!.borderStyle = .roundedRect
         m_txfMin!.keyboardType = .numberPad
         m_txfMin!.returnKeyType = .done
@@ -140,6 +156,7 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
     
     private func maxTextFieldSet() {
         m_txfMax = UITextField()
+        m_txfMax?.text = String(m_iDefaultMax)
         m_txfMax!.borderStyle = .roundedRect
         m_txfMax!.keyboardType = .numberPad
         m_txfMax!.returnKeyType = .done

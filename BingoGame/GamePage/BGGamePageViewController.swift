@@ -121,11 +121,15 @@ class BGGamePageViewController: UIViewController {
     
     // Function
     @objc private func clickSetting() {
-        let m_vcSetPage = BGSettingViewController()
-        m_vcSetPage.setDelegate = self
-        
-        self.navigationController?.pushViewController(m_vcSetPage, animated: true)
+        let setPage = BGSettingViewController()
+        setPage.setDelegate = self
+        setPage.m_iDefaultSize = m_iBoardSize
+        setPage.m_iDefaultGoal = m_iGoal
+        setPage.m_iDefaultMin = m_iMinNum
+        setPage.m_iDefaultMax = m_iMaxNum
+        self.navigationController?.pushViewController(setPage, animated: true)
     }
+    
     @objc private func clickGame() {
         switch m_BoardStatus {
         case .Ready:
