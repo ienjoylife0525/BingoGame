@@ -26,10 +26,10 @@ class BGGamePageViewController: UIViewController {
     
     // variable
     var m_iBoardSize: Int = 0
-    var m_iGoal:Int = 0
-    var m_iMinNum:Int = 0
-    var m_iMaxNum:Int = 0
-    var m_iChessNum:Int = 0
+    var m_iGoal: Int = 0
+    var m_iMinNum: Int = 0
+    var m_iMaxNum: Int = 0
+    var m_iChessNum: Int = 0
     var m_BoardStatus: BoardStatus = .`default`
     
     // Model
@@ -52,6 +52,7 @@ class BGGamePageViewController: UIViewController {
     private func viewSet() {
         self.view.backgroundColor = UIColor.white
         self.title = "Text:GamePage".localized()
+        
         settingBtnSet()
         statusLabelSet()
         startBtnSet()
@@ -61,7 +62,7 @@ class BGGamePageViewController: UIViewController {
     
     private func settingBtnSet() {
         m_btnSetting = UIBarButtonItem(title: "Text:Set".localized(), style: .plain, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = m_btnSetting
+        navigationItem.rightBarButtonItem = m_btnSetting
     }
     
     private func statusLabelSet() {
@@ -253,7 +254,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
             self.m_cvBoard?.reloadData()
             if m_model.checkBingo(size: m_iBoardSize) >= m_iGoal {
                 m_lbStatus?.text = "Text:Win".localized()
-            }else {
+            } else {
                 m_lbStatus?.text = "Text:Status".localized(m_model.checkBingo(size: m_iBoardSize), m_iGoal)
 
             }
@@ -271,9 +272,9 @@ extension BGGamePageViewController: CellInputDataDelegate{
             UIAlertController().showAlert(message: "Alert:CellNumEmpty".localized())
             self.m_cvBoard?.reloadData()
             return
-        } else{
+        } else {
             for i in 0..<self.m_iChessNum {
-                if Int(data)! == m_model.m_aryRandom[i] && i != index{
+                if Int(data)! == m_model.m_aryRandom[i] && i != index {
                     UIAlertController().showAlert(message: "Alert:NumRepeat".localized())
                     self.m_cvBoard?.reloadData()
                     return
