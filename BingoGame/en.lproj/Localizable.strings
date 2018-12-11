@@ -39,3 +39,4 @@
 "Alert:WrongMax" = "Maximum should biger than minimum";
 "Alert:CellNumEmpty" = "Please input number";
 "Alert:OverGame" = "Over the Game?";
+"Alert:unValidSize" = "Size should biger than 1";

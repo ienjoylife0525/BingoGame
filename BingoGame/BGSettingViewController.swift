@@ -203,6 +203,8 @@ class BGSettingViewController: UIViewController, UITextFieldDelegate {
         if size == "" {
             UIAlertController().showAlert(message: "Alert:NoSize".localized())
             return false
+        } else if Int(size)! <= 1 {
+            UIAlertController().showAlert(message: "Alert:unValidSize".localized())
         }
         //Goal Check
         guard let goal = m_txfGoal?.text else {

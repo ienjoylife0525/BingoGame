@@ -39,4 +39,5 @@
 "Alert:WrongMax" = "最大值應大於最小值";
 "Alert:CellNumEmpty" = "請輸入數字";
 "Alert:OverGame" = "確定結束遊戲？";
+"Alert:unValidSize" = "尺寸應大於等1";
 

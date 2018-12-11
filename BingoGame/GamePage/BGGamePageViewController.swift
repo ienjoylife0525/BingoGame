@@ -8,12 +8,11 @@
 
 import Foundation
 import UIKit
-//列舉指定類別
-enum BoardStatus {
-    // 列舉小寫
-    case Default
-    case Ready
-    case Gaming
+
+enum BoardStatus: Int {
+    case `default`
+    case ready
+    case gaming
 }
 
 class BGGamePageViewController: UIViewController {
@@ -31,7 +30,7 @@ class BGGamePageViewController: UIViewController {
     var m_iMinNum:Int = 0
     var m_iMaxNum:Int = 0
     var m_iChessNum:Int = 0
-    var m_BoardStatus: BoardStatus = .Default
+    var m_BoardStatus: BoardStatus = .`default`
     
     // Model
     var m_model = GamePageModel()
@@ -90,13 +89,13 @@ class BGGamePageViewController: UIViewController {
     
     private func startBtnChange() {
         switch m_BoardStatus {
-        case .Default:
+        case .`default`:
             m_btnGameStart?.isHidden = true
-        case .Ready:
+        case .ready:
             m_btnGameStart?.isHidden = false
             m_btnGameStart!.setTitle("Text:GameStart".localized(), for: .normal)
             m_btnGameStart!.backgroundColor = UIColor.rgb(kCOliveDrab)
-        case .Gaming:
+        case .gaming:
             m_btnGameStart?.isHidden = false
             m_btnGameStart!.setTitle("Text:GameEnd".localized(), for: .normal)
             m_btnGameStart!.backgroundColor = UIColor.rgb(kCVividRed)
@@ -132,16 +131,16 @@ class BGGamePageViewController: UIViewController {
     
     @objc private func clickGame() {
         switch m_BoardStatus {
-        case .Ready:
+        case .ready:
             //Become Gaming
-            m_BoardStatus = .Gaming
+            m_BoardStatus = .gaming
             m_cvBoard?.reloadData()
             m_btnSetting?.isEnabled = false
             startBtnChange()
-        case .Gaming:
+        case .gaming:
             //Become Default
             UIAlertController().showConfirmAlert(message: "Alert:OverGame".localized(), confirm: {() -> Void in
-                self.m_BoardStatus = .Default
+                self.m_BoardStatus = .`default`
                 self.m_cvBoard?.reloadData()
                 self.startBtnChange()
                 self.m_btnSetting?.isEnabled = true
@@ -158,7 +157,7 @@ class BGGamePageViewController: UIViewController {
         self.m_model.m_aryBoard = [Bool](repeating: false, count: m_iChessNum)
         m_model.randomBoard(m_iChessNum, min: m_iMinNum, max: m_iMaxNum)
         //Draw board
-        self.m_BoardStatus = .Ready
+        self.m_BoardStatus = .ready
         self.m_cvBoard?.reloadData()
         self.startBtnChange()
         
@@ -201,7 +200,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch m_BoardStatus {
-        case .Default:
+        case .`default`:
             return 0
         default:
             break
@@ -212,11 +211,11 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BGBoardCollectionViewCell
         switch self.m_BoardStatus {
-        case .Ready:
+        case .ready:
             cell.m_txfNum.isHidden = false
             cell.m_lbNum.isHidden = true
             cell.m_txfNum!.text = "\(m_model.m_aryRandom[indexPath.item])"
-        case .Gaming:
+        case .gaming:
             cell.m_txfNum.isHidden = true
             cell.m_lbNum.isHidden = false
             cell.m_lbNum!.text = "\(m_model.m_aryRandom[indexPath.item])"
@@ -249,7 +248,7 @@ extension BGGamePageViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch m_BoardStatus {
-        case .Gaming:
+        case .gaming:
             m_model.m_aryBoard[indexPath.item] = !m_model.m_aryBoard[indexPath.item]
             self.m_cvBoard?.reloadData()
             if m_model.checkBingo(size: m_iBoardSize) >= m_iGoal {
@@ -301,6 +300,5 @@ protocol GameSettingDelegate: class {
     
 }
 
-// Alert 試著用閉包
 
 
